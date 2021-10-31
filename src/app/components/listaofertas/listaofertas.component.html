@@ -1,1 +1,29 @@
-<p>listaofertas works!</p>
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-10 mt-4 border shadow p-3 mb-5 bg-body rounded">
+      <div class="col-md-12 p-2">
+        <label class="form-control bg-primary text-white"><h3>Listado de las ofertas de trabajo deisponibles</h3></label>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"><h4>#</h4></th>
+            <th scope="col" class="col-md-9"><h5>Ofertas de trabajo</h5></th>
+            <th scope="col" class="col-md-3"><h5>Ver la oferta completa</h5></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of getArrayDataOffers()"> <!--Colocar aquí el ngFor-->
+            <th scope="row"><h5>{{item.id}})</h5></th>
+            <td class="p-3"><h4>{{item.titulo}}</h4></td>
+            <td class="ps-4 p-3" (click)="goToFullOffer(item.id)" ><button class="btn btn-outline-primary shadow-sm" style="width: 140px;">Ver oferta</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+

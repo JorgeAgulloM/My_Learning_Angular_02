@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  private homeLogin: boolean
+
+  constructor(
+    private _router: Router
+    )
+    {
+      this.homeLogin = false
+     }
 
   ngOnInit(): void {
   }
 
+  gotToLoginOrHome(): void{
+    this.homeLogin = !this.homeLogin
+    let iter = this.homeLogin ? 'home/login' : 'home'
+    this._router.navigate([iter])
+  }
 }

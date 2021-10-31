@@ -1,1 +1,78 @@
-<p>login works!</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Login</title>
+</head>
+<body>
+
+  <main class="mt-5 mb-5 ">
+    <div class="row d-flex justify-content-center">
+        <div class="col-8 col-sm-4 d-flex justify-content-center align-items-center">
+
+          <div class="row justify-content-center p-2 shadow-lg mt-3 bg-body rounded">
+
+            <div class="col-md-12 p-2">
+              <label class="form-control bg-primary text-white">Por favor, introduce tus credenciales</label>
+            </div>
+
+            <form class="row"
+              name="loginForm">
+              <div class="col-md-12">
+                <div class="input-group mt-3 form-floating">
+                  <input class="form-control col-md-4"
+                        type="text"
+                        name="user"
+                        formControlName="user"
+                        placeholder="Dirección de correo"
+                        required
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="left"
+                        title="Introduce el email con el que te registraste">
+                  <label for="user"
+                        class="form-label">Usuario</label>
+                  <span class="input-group-text"id="email">@</span>
+                </div>
+              </div>
+              <div class="input-group col-md-12 mt-3 form-floating">
+                <input class="form-control"
+                      type="password"
+                      id="loginPassword"
+                      formControlName="password"
+                      placeholder="Contraseña"
+                      required
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="left"
+                      title="Introduce tu contraseña">
+                      <button class="btn btn-primary rounded-end"
+                              type="button"
+                              id="ShowLoginPassword"
+                              onclick="mostrarLoginPassword()">
+                          <span class="fa fa-eye-slash lIcon"></span>
+                        </button>
+                <label for="password"
+                      class="form-label ms-2">Contraseña</label>
+              </div>
+              <div class="col-md-12 mt-4">
+                <button class="btn btn-primary m-2 col-md-4"
+                        type="submit"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="left"
+                        title="Si lo ves, pulsa para entrar">
+                        Login
+                      </button>
+              </div>
+            </form>
+          </div>
+        </div>
+    </div>
+</main>
+
+
+
+
+</body>
+</html>

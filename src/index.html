@@ -6,6 +6,30 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  <script>
+      function mostrarLoginPassword(){
+        var cambio = document.getElementById("loginPassword");
+        if(cambio.type == "password"){
+          cambio.type = "text";
+          $('.lIcon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+        }else{
+          cambio.type = "password";
+          $('.lIcon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+        }
+      }
+
+      $(document).ready(function () {
+        //CheckBox mostrar contraseña
+        $('#ShowLoginPassword').click(function () {
+          $('#loginPassword').attr('type', $(this).is(':checked') ? 'text' : 'password');
+        });
+      });
+  </script>
+
 </head>
 <body>
   <app-root></app-root>
