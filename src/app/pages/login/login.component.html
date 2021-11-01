@@ -8,7 +8,6 @@
   <title>Login</title>
 </head>
 <body>
-
   <main class="mt-5 mb-5 ">
     <div class="row d-flex justify-content-center">
         <div class="col-8 col-sm-4 d-flex justify-content-center align-items-center">
@@ -20,13 +19,15 @@
             </div>
 
             <form class="row"
-              name="loginForm">
+              name="FormLogin"
+              [formGroup]="ValidateLogin"
+              (ngSubmit)="sendLogin()">
               <div class="col-md-12">
                 <div class="input-group mt-3 form-floating">
                   <input class="form-control col-md-4"
                         type="text"
-                        name="user"
-                        formControlName="user"
+                        name="username"
+                        formControlName="username"
                         placeholder="Dirección de correo"
                         required
                         data-bs-toggle="tooltip"
@@ -55,6 +56,21 @@
                         </button>
                 <label for="password"
                       class="form-label ms-2">Contraseña</label>
+              </div>
+              <div class="col-12 mt-3">
+                <div class="form-check form-switch">
+                  <input class="form-check-input"
+                  type="checkbox"
+                  name="rememberMe"
+                  role="switch"
+                  formControlName="rememberMe"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="left"
+                  title="Espero que te las hayas leido">
+                  <label class="form-check-label" for="invalidCheck">
+                    Recuérdame.
+                  </label>
+                </div>
               </div>
               <div class="col-md-12 mt-4">
                 <button class="btn btn-primary m-2 col-md-4"

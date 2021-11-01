@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { CommAPIService } from 'src/app/services/comm-api.service';
 
 @Component({
-  selector: 'app-listaofertas',
+  selector: 'app-offerslist',
   templateUrl: './offerlist.component.html',
   styleUrls: ['./offerlist.component.css']
 })
@@ -40,6 +40,7 @@ export class OfferListComponent implements OnInit {
   }
 
   goToFullOffer(id: string): void {
-    this._router.navigate(['home/oferta', id])
+    console.log('GoToFullOffer' + id)
+    this._router.navigate(['home/offer', id])
   }
 }

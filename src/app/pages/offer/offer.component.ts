@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommAPIService } from 'src/app/services/comm-api.service';
 
 @Component({
-  selector: 'app-oferta',
+  selector: 'app-offer',
   templateUrl: './offer.component.html',
   styleUrls: ['./offer.component.css']
 })
@@ -20,7 +20,9 @@ export class OfferComponent implements OnInit {
      }
 
   ngOnInit(): void {
+    console.log('Inicio de offer')
     this.getDataOfferID(this._actdRoute.snapshot.paramMap.get('id')!)
+    console.log('offer Init' + this._actdRoute.snapshot.paramMap.get('id')!)
   }
 
   getDataOffer(value: number): string {

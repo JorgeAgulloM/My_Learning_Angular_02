@@ -21,25 +21,22 @@ const routes: Routes = [
         component: AllOffersComponent
       },
       {
-        path:'ofertas',
-        component: AllOffersComponent,
-        children: [
-        {
-          path:'oferta/:id',
-          component: OfferComponent
-        }
-        ]
+        path:'offers',
+        component: AllOffersComponent
+      },        {
+        path:'offer/:id',
+        component: OfferComponent
       },
       {
         path:'login',
         component: LoginComponent,
         children:[
           {
-            path:'ofertas',
+            path:'offers',
             component: AllOffersComponent
           },
           {
-            path:'nueva_oferta',
+            path:'new_offer',
             component: NewOfferComponent
           }
         ]
