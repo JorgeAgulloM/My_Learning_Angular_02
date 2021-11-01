@@ -1,8 +1,7 @@
 import { RouterModule } from '@angular/router';
-import { OfertacompletaComponent } from './ofertacompleta/ofertacompleta.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ListaofertasComponent } from './listaofertas/listaofertas.component';
+import { OfferListComponent } from './offerlist/offerlist.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
 
@@ -10,8 +9,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
-    ListaofertasComponent,
-    OfertacompletaComponent,
+    OfferListComponent,
     NavbarComponent
   ],
   imports: [
@@ -20,8 +18,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     RouterModule
   ],
   exports: [
-    ListaofertasComponent,
-    OfertacompletaComponent,
+    OfferListComponent,
     NavbarComponent
   ]
 })

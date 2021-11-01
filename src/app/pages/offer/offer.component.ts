@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommAPIService } from 'src/app/services/comm-api.service';
 
 @Component({
-  selector: 'app-ofertacompleta',
-  templateUrl: './ofertacompleta.component.html',
-  styleUrls: ['./ofertacompleta.component.css']
+  selector: 'app-oferta',
+  templateUrl: './offer.component.html',
+  styleUrls: ['./offer.component.css']
 })
-export class OfertacompletaComponent implements OnInit {
+export class OfferComponent implements OnInit {
 
   private dataOffer: Array<any>
 
   constructor(
     private _comApiSrv: CommAPIService,
+    private _router: Router,
     private _actdRoute: ActivatedRoute
     ) {
       this.dataOffer = new Array<any>()
@@ -26,15 +27,22 @@ export class OfertacompletaComponent implements OnInit {
     return this.dataOffer[value]
   }
 
-  //Suscripciçón
+  //Suscripción
   getDataOfferID(id: string): void{
     this._comApiSrv.getDataOfferID(id).subscribe(
       response =>{
-        this.dataOffer = response
+        Object.entries(response).forEach(
+          ([key, value]) => this.dataOffer.push(value)
+        )
       },
       error => {
         this.dataOffer = error
       }
     )
   }
+
+  goToHome(): void {
+    this._router.navigate(['/home'])
+  }
+
 }

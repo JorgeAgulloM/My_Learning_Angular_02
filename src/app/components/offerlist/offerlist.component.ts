@@ -4,10 +4,10 @@ import { CommAPIService } from 'src/app/services/comm-api.service';
 
 @Component({
   selector: 'app-listaofertas',
-  templateUrl: './listaofertas.component.html',
-  styleUrls: ['./listaofertas.component.css']
+  templateUrl: './offerlist.component.html',
+  styleUrls: ['./offerlist.component.css']
 })
-export class ListaofertasComponent implements OnInit {
+export class OfferListComponent implements OnInit {
 
   private arrayDataOffers: Array<any>
 

@@ -2,14 +2,14 @@ import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { OfertaComponent } from './pages/oferta/oferta.component';
-import { OfertasComponent } from './pages/ofertas/ofertas.component';
-import { NuevaofertaComponent } from './pages/nuevaoferta/nuevaoferta.component';
+import { OfferComponent } from './pages/offer/offer.component';
+import { AllOffersComponent } from './pages/alloffers/alloffers.component';
+import { NewOfferComponent } from './pages/newoffer/newoffer.component';
 
 const routes: Routes = [
   {
     path:'',
-    redirectTo:'home',//'home'
+    redirectTo:'home',
     pathMatch:'full'
   },
   {
@@ -18,15 +18,17 @@ const routes: Routes = [
     children:[
       {
         path:'',
-        component: OfertasComponent
+        component: AllOffersComponent
       },
       {
         path:'ofertas',
-        component: OfertasComponent
-      },
-      {
-        path:'oferta/:id',
-        component: OfertaComponent
+        component: AllOffersComponent,
+        children: [
+        {
+          path:'oferta/:id',
+          component: OfferComponent
+        }
+        ]
       },
       {
         path:'login',
@@ -34,11 +36,11 @@ const routes: Routes = [
         children:[
           {
             path:'ofertas',
-            component: OfertasComponent
+            component: AllOffersComponent
           },
           {
             path:'nueva_oferta',
-            component: NuevaofertaComponent
+            component: NewOfferComponent
           }
         ]
       }

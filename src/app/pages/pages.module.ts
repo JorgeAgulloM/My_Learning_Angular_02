@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { NuevaofertaComponent } from './nuevaoferta/nuevaoferta.component';
-import { OfertaComponent } from './oferta/oferta.component';
-import { OfertasComponent } from './ofertas/ofertas.component';
+import { NewOfferComponent } from './newoffer/newoffer.component';
+import { OfferComponent } from './offer/offer.component';
+import { AllOffersComponent } from './alloffers/alloffers.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from '../components/components.module';
 
@@ -13,9 +13,9 @@ import { ComponentsModule } from '../components/components.module';
   declarations: [
     HomeComponent,
     LoginComponent,
-    NuevaofertaComponent,
-    OfertaComponent,
-    OfertasComponent
+    NewOfferComponent,
+    OfferComponent,
+    AllOffersComponent
   ],
   imports: [
     CommonModule,
@@ -26,9 +26,9 @@ import { ComponentsModule } from '../components/components.module';
   exports: [
     HomeComponent,
     LoginComponent,
-    NuevaofertaComponent,
-    OfertaComponent,
-    OfertasComponent
+    NewOfferComponent,
+    OfferComponent,
+    AllOffersComponent
   ]
 })
 export class PagesModule { }
