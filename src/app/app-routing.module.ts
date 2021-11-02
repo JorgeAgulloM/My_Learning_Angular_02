@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { OfferComponent } from './pages/offer/offer.component';
 import { AllOffersComponent } from './pages/alloffers/alloffers.component';
 import { NewOfferComponent } from './pages/newoffer/newoffer.component';
+import { LogincardComponent } from './components/logincard/logincard.component';
 
 const routes: Routes = [
   {
@@ -26,20 +27,24 @@ const routes: Routes = [
       },        {
         path:'offer/:id',
         component: OfferComponent
+      }
+    ]
+  },
+  {
+    path:'login',
+    component: LoginComponent,
+    children:[
+      {
+        path:'',
+        component: LogincardComponent
       },
       {
-        path:'login',
-        component: LoginComponent,
-        children:[
-          {
-            path:'offers',
-            component: AllOffersComponent
-          },
-          {
-            path:'new_offer',
-            component: NewOfferComponent
-          }
-        ]
+        path:'offers',
+        component: AllOffersComponent
+      },
+      {
+        path:'new_offer',
+        component: NewOfferComponent
       }
     ]
   }

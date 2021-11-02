@@ -1,6 +1,5 @@
 import { CommAPIService } from 'src/app/services/comm-api.service';
 import { Component, Injectable, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
 import { FormLogin } from 'src/app/Models/FormLogin'//'ofertasEmpleo/src/app/Models/FormLogin.ts'
 
 @Injectable({
@@ -14,29 +13,8 @@ import { FormLogin } from 'src/app/Models/FormLogin'//'ofertasEmpleo/src/app/Mod
 export class LoginComponent implements OnInit {
 
   constructor(
-    private fb: FormBuilder,
     private _comApiSrv: CommAPIService
   ) {}
-
-  ValidateLogin = this.fb.group({
-    username: ['', Validators.required],
-    password: ['', Validators.required],
-    rememberMe: ['']
-  })
-
-  sendLogin(): void {
-    let value: FormLogin = new FormLogin(
-      this.ValidateLogin.value.username,
-      this.ValidateLogin.value.password,
-      this.ValidateLogin.value.rememberMe
-    )
-
-
-    //Suscripciçón
-
-      this.getDataOffers(value)
-
-  }
 
 
   getDataOffers(value: FormLogin): void {

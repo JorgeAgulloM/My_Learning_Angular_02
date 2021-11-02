@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
 
   gotToLoginOrHome(): void{
     this.homeLogin = !this.homeLogin
-    let iter = this.homeLogin ? 'home/login' : 'home'
+    let iter = this.homeLogin ? 'login' : 'home'
     this._router.navigate([iter])
   }
 }

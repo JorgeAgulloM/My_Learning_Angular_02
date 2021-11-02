@@ -4,13 +4,15 @@ import { CommonModule } from '@angular/common';
 import { OfferListComponent } from './offerlist/offerlist.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
+import { LogincardComponent } from './logincard/logincard.component';
 
 
 
 @NgModule({
   declarations: [
     OfferListComponent,
-    NavbarComponent
+    NavbarComponent,
+    LogincardComponent
   ],
   imports: [
     CommonModule,
