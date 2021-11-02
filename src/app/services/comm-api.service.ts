@@ -3,23 +3,46 @@ import { AppEndPoints } from './../endpoints.component';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http'
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommAPIService {
 
-  //Sujeto
-  private offersList$ = new Subject<Array<any>>()
-  //private postId = ArrayBuffer<string>()
+  constructor(
+    private _http: HttpClient,
+    private _cookie: CookieService
+  ) {}
 
-  //Almacenamiento
-  private offersArray: Array<any>
-
-  constructor(private http: HttpClient) {
-    this.offersArray = []
-    //this.postId = new ArrayBuffer
+  //  HttpClient Observable. Petición Get
+  getDataOffers(): Observable<any> {
+    const URL = AppEndPoints.END_POINT_API_OFERTAS
+    return this._http.get(URL)
   }
+
+  //  HttpClient Observable. Petición Get/id
+  getDataOfferID(id: string): Observable<any> {
+    const URL = AppEndPoints.END_POINT_API_OFERTAS + `/${id}`
+    return this._http.get(URL)
+  }
+
+  //  Metodo post que funciona
+  postDataUserLogin(body: FormLogin): Observable<any> {
+    const headers = {'Content-Type':  'application/json', 'Authorization': 'Bearer my-token'}
+    return this._http.post<FormLogin>(AppEndPoints.END_POINT_API_AUTH + '?', JSON.stringify(body), {headers})
+  }
+
+  //  Setter para guardar el token
+  setToken(token: string) {
+    this._cookie.set('id_token', token)
+  }
+
+  //  Getter para obtener el token
+  getToken(): string {
+    return this._cookie.get('id_token')
+  }
+
 
 /*   //Agregar elementos al array de ofertas
   addToList(elemento: any){
@@ -33,17 +56,7 @@ export class CommAPIService {
     return this.offersList$.asObservable()
   } */
 
-  //HttpClient Observable. Petición Get
-  getDataOffers(): Observable<any> {
-    const URL = AppEndPoints.END_POINT_API_OFERTAS
-    return this.http.get(URL)
-  }
 
-  //HttpClient Observable. Petición Get/id
-  getDataOfferID(id: string): Observable<any> {
-    const URL = AppEndPoints.END_POINT_API_OFERTAS + `/${id}`
-    return this.http.get(URL)
-  }
 
 /*   // Metodo post que funciona
   postDataUserLogin(body: FormLogin): any {
@@ -60,11 +73,7 @@ export class CommAPIService {
     )
   } */
 
-    // Metodo post que funciona
-    postDataUserLogin(body: FormLogin): Observable<any> {
-      const headers = {'Content-Type':  'application/json', 'Authorization': 'Bearer my-token'}
-      return this.http.post<FormLogin>(AppEndPoints.END_POINT_API_AUTH + '?', JSON.stringify(body), {headers})
-    }
+
  /*  postDataUserLogin(body: FormLogin): boolean {
     const URL = AppEndPoints.END_POINT_API_AUTH + '/?'
     console.log(URL)

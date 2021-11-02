@@ -13,14 +13,10 @@ import { FormLogin } from 'src/app/Models/FormLogin'//'ofertasEmpleo/src/app/Mod
 })
 export class LoginComponent implements OnInit {
 
-  private pruebaToken: any
-
   constructor(
     private fb: FormBuilder,
     private _comApiSrv: CommAPIService
-  ) {
-
-  }
+  ) {}
 
   ValidateLogin = this.fb.group({
     username: ['', Validators.required],
@@ -40,21 +36,19 @@ export class LoginComponent implements OnInit {
 
       this.getDataOffers(value)
 
-
-    //this._comApiSrv.addHero(value)
-    //this._comApiSrv.postData(value)
   }
 
 
   getDataOffers(value: FormLogin): void {
     this._comApiSrv.postDataUserLogin(value).subscribe(
-      Response =>{
-        this.pruebaToken = JSON.stringify(Response)
+      response =>{
+        this._comApiSrv.setToken(response.id_token)
+
         console.log('Asimilando el token')
-        console.log(this.pruebaToken)
+        console.log(response.id_token)
       },
       error => {
-        this.pruebaToken = error
+        'TODO'
       }
     )
 
