@@ -39,7 +39,7 @@ const routes: Routes = [
         component: LogincardComponent
       },
       {
-        path:'offers',
+        path:'offersAdmin/:user',
         component: AllOffersComponent
       },
       {

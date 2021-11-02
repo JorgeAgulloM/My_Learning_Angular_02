@@ -16,7 +16,25 @@
           <tr *ngFor="let item of getArrayDataOffers()"> <!--Colocar aquí el ngFor-->
             <th scope="row"><h5>{{item.id}})</h5></th>
             <td class="p-3"><h4>{{item.titulo}}</h4></td>
-            <td class="ps-4 p-3" (click)="goToFullOffer(item.id)" ><button class="btn btn-outline-primary shadow-sm" style="width: 140px;">Ver oferta</button></td>
+            <td 
+              class="ps-4 p-3" 
+              *ngIf="!getModeAmin()" 
+              (click)="goToFullOffer(item.id)">
+              <button 
+                  class="btn btn-outline-primary shadow-sm fa fa-eye" 
+                  style="width: 140px;"> 
+                  Ver oferta</button>
+            </td>
+            <td 
+              class="ps-4 p-3" 
+              *ngIf="getModeAmin()" 
+              (click)="deleteOneOffer(item.id)">
+              <button 
+                  class="btn btn-danger shadow-sm fa fa-trash" 
+                  style="width: 140px;"> 
+                  Borrar oferta
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
