@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { OfferComponent } from './pages/offer/offer.component';
 import { AllOffersComponent } from './pages/alloffers/alloffers.component';
-import { NewOfferComponent } from './pages/newoffer/newoffer.component';
 import { LogincardComponent } from './components/logincard/logincard.component';
 import { CreateNewOfferComponent } from './components/create-new-offer/create-new-offer.component';
 
@@ -28,7 +27,7 @@ const routes: Routes = [
       },        {
         path:'offer/:id',
         component: OfferComponent
-      }
+      },
     ]
   },
   {

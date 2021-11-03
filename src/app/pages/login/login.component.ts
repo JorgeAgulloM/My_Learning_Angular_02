@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
     this._comApiSrv.insertNewOffer(value).subscribe(
       response => {
         console.log(response)
-
+        this.goToOffersModeAdmin('admin')
       },
       error => {
         console.log(error)

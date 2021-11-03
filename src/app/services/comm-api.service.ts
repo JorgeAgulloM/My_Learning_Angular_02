@@ -1,6 +1,6 @@
 import { FormLogin } from 'src/app/Models/FormLogin';
 import { AppEndPoints } from './../endpoints.component';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http'
 import { CookieService } from 'ngx-cookie-service';
@@ -9,13 +9,17 @@ import { FormNewOffer } from '../Models/FormNewOffer';
 @Injectable({
   providedIn: 'root'
 })
-export class CommAPIService {
+export class CommAPIService implements OnInit {
 
   constructor(
     private _http: HttpClient,
     private _cookie: CookieService
   ) {
     this._cookie.set('id_token', "null")
+    console.log('Hola')
+  }
+  ngOnInit(): void {
+    console.log('Hola')
   }
 
   //  HttpClient Observable. Petición Get
@@ -38,9 +42,7 @@ export class CommAPIService {
 
   //  Setter para guardar el token
   setToken(token: string) {
-    console.log(this._cookie.getAll())
     this._cookie.set('id_token', token)
-    console.log(this._cookie.getAll())
   }
 
   //  Getter para obtener el token
@@ -48,13 +50,15 @@ export class CommAPIService {
     return this._cookie.get('id_token')
   }
 
-  // obtener estado de usuario
-  getUserState(): boolean {
-    console.log(this._cookie.getAll())
-    console.log(this._cookie.get('id_token'))
+  //  Método para cerra la sesión de usuario
+  closeSessionUser(): boolean {
+    this._cookie.set('id_token', "null")
+    return this.getAdminState()
+  }
 
+  //  obtener estado de usuario
+  getAdminState(): boolean {
     return (this._cookie.get('id_token') != "null")
-
   }
 
   // HttpClien Observable. Petición Post New Offer

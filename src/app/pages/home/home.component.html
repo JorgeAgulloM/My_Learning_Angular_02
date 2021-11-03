@@ -7,10 +7,10 @@
 
   <title>Home</title>
 </head>
-<body>
+<body class="scroll">
+
   <app-navbar></app-navbar>
-  <button class="btn btn-outline-primary shadow m-3" (click)="gotToLoginOrHome()">Login</button>
-  <router-outlet></router-outlet>
+  <main><router-outlet></router-outlet></main>
 
 </body>
 </html>

@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+.ng-valid[required], .ng-valid.required  {
+  border: 2px solid #42A948; /* green */
+  }
+
+.ng-invalid:not(form)  {
+  border-bottom: 3px solid #d3b81e; /* yellow */
+  }
+  html,body{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+  }
+
+  body{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  h1 {
+    text-shadow: 1px 2px 4px black
+  }

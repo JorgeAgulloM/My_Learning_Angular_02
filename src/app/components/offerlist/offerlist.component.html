@@ -13,27 +13,56 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of getArrayDataOffers()"> <!--Colocar aquí el ngFor-->
-            <th scope="row"><h5>{{item.id}})</h5></th>
+          <tr *ngFor="let item of getArrayDataOffers(), let i = index"> <!--Colocar aquí el ngFor-->
+            <th scope="row"><h5>{{i+1}})</h5></th>
             <td class="p-3"><h4>{{item.titulo}}</h4></td>
             <td
               class="ps-4 p-3"
-              *ngIf="!getModeAmin()"
-              (click)="goToFullOffer(item.id)">
+              *ngIf="!getModeAmin()">
               <button
                   class="btn btn-outline-primary shadow-sm fa fa-eye"
-                  style="width: 140px;">
+                  style="width: 140px;"
+                  (click)="goToFullOffer(item.id)">
                   Ver oferta</button>
             </td>
             <td
               class="ps-4 p-3"
-              *ngIf="getModeAmin()"
-              (click)="deleteOneOffer(item.id)">
-              <button
-                  class="btn btn-danger shadow-sm fa fa-trash"
-                  style="width: 140px;">
-                  Borrar oferta
-              </button>
+              *ngIf="getModeAmin()">
+              <ul
+                class="navbar-nav me-2">
+                <li
+                  class="nav-item dropdown">
+                  <a
+                    class="btn btn-primary dropdown-toggle fa-4x fa fa-wrench fs-5"
+                    id="navbarDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Herramientas Administrador
+                  </a>
+                  <ul
+                    class="dropdown-menu fs-5"
+                    aria-labelledby="navbarDropdown">
+                    <li>
+                      <a
+                        class="dropdown-item fa fa-arrow-right"
+                        (click)="gotToNewOffer()">
+                        Crear Oferta
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        class="dropdown-item fa fa-trash-o"
+                        (click)="deleteOneOffer(item.id)">
+                        Borrar Oferta
+                      </a>
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+
+                    <li><a class="dropdown-item" >Proximamente</a></li>
+                  </ul>
+                </li>
+              </ul>
             </td>
           </tr>
         </tbody>

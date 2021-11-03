@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LoginComponent } from 'src/app/pages/login/login.component';
 import { CommAPIService } from 'src/app/services/comm-api.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class OfferListComponent implements OnInit {
   constructor(
     private _comApiSrv: CommAPIService,
     private _router: Router,
-    private _actdRouter: ActivatedRoute
+    private _actdRouter: ActivatedRoute,
+    private _login: LoginComponent
     ) {
     this.arrayDataOffers = new Array<any>()
     this.modeAmin = false
@@ -24,7 +26,7 @@ export class OfferListComponent implements OnInit {
   ngOnInit(): void {
 
     this.getDataOffers()
-    this.setModeAdmin(this._comApiSrv.getUserState())
+    this.setModeAdmin(this._comApiSrv.getAdminState())
   }
 
   getArrayDataOffers(): Array<any> {
@@ -36,7 +38,6 @@ export class OfferListComponent implements OnInit {
     this._comApiSrv.getDataOffers().subscribe(
       response => {
         this.arrayDataOffers = response
-        console.log(JSON.stringify(response))
       },
       error => {
         console.log('ERROR Http = ' + JSON.stringify(error))
@@ -50,10 +51,8 @@ export class OfferListComponent implements OnInit {
     this._comApiSrv.deleteOneOffer(id).subscribe(
       response => {
         this.getDataOffers()
-        console.log(response)
       },
       error => {
-        console.log(error)
         alert(error)
 
       }
@@ -63,12 +62,14 @@ export class OfferListComponent implements OnInit {
 
 
   goToFullOffer(id: string): void {
-    console.log('GoToFullOffer' + id)
     this._router.navigate(['home/offer', id])
   }
 
+  gotToNewOffer(): void {
+    this._login.gotToNewOffer()
+  }
+
   getModeAmin(): boolean {
-    console.log('Consultado estado de usuario')
     return this.modeAmin;
   }
 
