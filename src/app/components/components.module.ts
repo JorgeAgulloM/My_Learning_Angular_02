@@ -5,6 +5,7 @@ import { OfferListComponent } from './offerlist/offerlist.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LogincardComponent } from './logincard/logincard.component';
+import { CreateNewOfferComponent } from './create-new-offer/create-new-offer.component';
 
 
 
@@ -12,7 +13,8 @@ import { LogincardComponent } from './logincard/logincard.component';
   declarations: [
     OfferListComponent,
     NavbarComponent,
-    LogincardComponent
+    LogincardComponent,
+    CreateNewOfferComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,9 @@ import { LogincardComponent } from './logincard/logincard.component';
   ],
   exports: [
     OfferListComponent,
-    NavbarComponent
+    NavbarComponent,
+    LogincardComponent,
+    CreateNewOfferComponent
   ]
 })
 export class ComponentsModule { }

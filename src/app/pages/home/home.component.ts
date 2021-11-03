@@ -1,4 +1,3 @@
-import { CommAPIService } from 'src/app/services/comm-api.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 

@@ -24,7 +24,7 @@ export class OfferListComponent implements OnInit {
   ngOnInit(): void {
 
     this.getDataOffers()
-   /*  this.setModeAmin() */
+    this.setModeAdmin(this._comApiSrv.getUserState())
   }
 
   getArrayDataOffers(): Array<any> {
@@ -49,37 +49,32 @@ export class OfferListComponent implements OnInit {
     // if (this.getConfirmAdminLoged()){
     this._comApiSrv.deleteOneOffer(id).subscribe(
       response => {
+        this.getDataOffers()
         console.log(response)
       },
       error => {
         console.log(error)
         alert(error)
-        /* this.modeAmin = false
-        this._router.navigate(['home']) */
+
       }
     )
-    /* } else {
-      alert("El usuario ha perdido la acreditación, volviendo a home...")
-      this.modeAmin = false
-      this._router.navigate(['home'])
-    } */
+
   }
 
-/*   getConfirmAdminLoged(): boolean {
-    return this._comApiSrv.getUserLoged()
-  } */
 
   goToFullOffer(id: string): void {
     console.log('GoToFullOffer' + id)
     this._router.navigate(['home/offer', id])
   }
 
-  public getModeAmin(): boolean {
+  getModeAmin(): boolean {
+    console.log('Consultado estado de usuario')
     return this.modeAmin;
   }
 
-/*   public setModeAmin(): void {
-      this.modeAmin = this.getConfirmAdminLoged()
-      console.log(this.modeAmin)
-  } */
+  private setModeAdmin(value: boolean): void {
+    this.modeAmin = value
+  }
+
+
 }

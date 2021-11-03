@@ -22,17 +22,11 @@ export class LogincardComponent implements OnInit {
   })
 
   sendLogin(): void {
-    let value: FormLogin = new FormLogin(
+    this._loginComp.postLoginUser(new FormLogin(
       this.ValidateLogin.value.username,
       this.ValidateLogin.value.password,
       this.ValidateLogin.value.rememberMe
-    )
-
-
-    //Suscripciçón
-
-      this._loginComp.getDataOffers(value)
-
+    ))
   }
 
   ngOnInit(): void {

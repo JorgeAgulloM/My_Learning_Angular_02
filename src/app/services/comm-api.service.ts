@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http'
 import { CookieService } from 'ngx-cookie-service';
+import { FormNewOffer } from '../Models/FormNewOffer';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class CommAPIService {
     private _http: HttpClient,
     private _cookie: CookieService
   ) {
-    this._cookie.delete("id_token")
+    this._cookie.set('id_token', "null")
   }
 
   //  HttpClient Observable. Petición Get
@@ -37,7 +38,9 @@ export class CommAPIService {
 
   //  Setter para guardar el token
   setToken(token: string) {
+    console.log(this._cookie.getAll())
     this._cookie.set('id_token', token)
+    console.log(this._cookie.getAll())
   }
 
   //  Getter para obtener el token
@@ -45,88 +48,26 @@ export class CommAPIService {
     return this._cookie.get('id_token')
   }
 
- /*  //  Getter para obtener el estado de login
-  getUserLoged(): boolean{
-    console.log('Vacio?')
-    console.log(JSON.stringify(this._cookie.get('id_token')) != null || 
-                JSON.stringify(this._cookie.get('id_token')) != "" ||
-                JSON.stringify(this._cookie.get('id_token')) != undefined)
-    let val: boolean = false
+  // obtener estado de usuario
+  getUserState(): boolean {
+    console.log(this._cookie.getAll())
+    console.log(this._cookie.get('id_token'))
 
-    if (this._cookie.get('id_token').length >= 0) {
-      if (this._cookie.get('id_token') != "") {
-        if (this._cookie.get('id_token') != null) {
-          val = true
-        }
-      }
-    }
+    return (this._cookie.get('id_token') != "null")
 
-    console.log(val + ' Token = ', this._cookie.get('id_token').length)    
-    return val //(this._cookie.get('id_token') != '')
-  } */
+  }
 
+  // HttpClien Observable. Petición Post New Offer
+  insertNewOffer(body: FormNewOffer): Observable<any> {
+    const headers = {Authorization: `Bearer ${this.getToken()}`, 'Content-Type': 'application/json'}
+    return this._http.post(AppEndPoints.END_POINT_API_NUEVA_OFERTA, JSON.stringify(body), {headers})
+  }
 
   // HttpClien Observable. Petición Delete
   deleteOneOffer(id: string): Observable<any> {
-    const headers = {Authorization: 'Bearer id_token'}
-    return this._http.delete(AppEndPoints.END_POINT_API_OFERTA + `/${id}`, {headers})
-    
+    const headers = {Authorization: `Bearer ${this.getToken()}`}
+    return this._http.delete(AppEndPoints.END_POINT_API_OFERTAS + `/${id}`, {headers})
+
   }
-
-
-/*   //Agregar elementos al array de ofertas
-  addToList(elemento: any){
-    this.offersArray.push(elemento)
-    //Escucha del evento
-    this.offersList$.next(this.offersArray)
-  }
-
-  //Observable
-  getOffers(): Observable<any> {
-    return this.offersList$.asObservable()
-  } */
-
-
-
-/*   // Metodo post que funciona
-  postDataUserLogin(body: FormLogin): any {
-    const headers = {'Content-Type':  'application/json', 'Authorization': 'Bearer my-token'}
-    this.http.post<FormLogin>(AppEndPoints.END_POINT_API_AUTH + '?', JSON.stringify(body), {headers}).subscribe(
-      Response =>{
-        console.log(JSON.stringify(Response))
-        return Response
-      },
-      error => {
-        console.log(error)
-        return error
-      }
-    )
-  } */
-
-
- /*  postDataUserLogin(body: FormLogin): boolean {
-    const URL = AppEndPoints.END_POINT_API_AUTH + '/?'
-    console.log(URL)
-    if (this.http.post(URL, JSON.stringify(body)).subscribe(data => {
-      console.log(data)
-    })){
-      console.log('Logeado')
-      return true
-    } else {
-      console.log('maaaaaal')
-      return false
-    }
-  }
-
-  postData(body: FormLogin): void {
-    const URL = AppEndPoints.END_POINT_API_AUTH + '/?'
-    const headers = {'Content-Type':  'application/json', 'Authorization': 'Bearer my-token'}
-    this.http.post(URL, JSON.stringify(body), {headers}).subscribe(data => {
-      console.log(data)
-    })
-  } */
-
-
-
 
 }

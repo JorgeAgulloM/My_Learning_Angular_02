@@ -6,6 +6,7 @@ import { OfferComponent } from './pages/offer/offer.component';
 import { AllOffersComponent } from './pages/alloffers/alloffers.component';
 import { NewOfferComponent } from './pages/newoffer/newoffer.component';
 import { LogincardComponent } from './components/logincard/logincard.component';
+import { CreateNewOfferComponent } from './components/create-new-offer/create-new-offer.component';
 
 const routes: Routes = [
   {
@@ -44,7 +45,7 @@ const routes: Routes = [
       },
       {
         path:'new_offer',
-        component: NewOfferComponent
+        component: CreateNewOfferComponent
       }
     ]
   }

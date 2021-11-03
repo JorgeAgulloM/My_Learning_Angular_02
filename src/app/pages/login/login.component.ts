@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { CommAPIService } from 'src/app/services/comm-api.service';
 import { Component, Injectable, OnInit } from '@angular/core';
 import { FormLogin } from 'src/app/Models/FormLogin'
+import { FormNewOffer } from 'src/app/Models/FormNewOffer';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,8 @@ export class LoginComponent implements OnInit {
     private _comApiSrv: CommAPIService
   ) {}
 
-
-  getDataOffers(value: FormLogin): void {
+  //  Subscripción para solicitar todas las ofertas
+  postLoginUser(value: FormLogin): void {
     this._comApiSrv.postDataUserLogin(value).subscribe(
       response =>{
         this._comApiSrv.setToken(response.id_token)
@@ -32,7 +33,19 @@ export class LoginComponent implements OnInit {
         'TODO'
       }
     )
+  }
 
+  //  Suscripción para crear una nueva oferta
+  setNewOffer(value: FormNewOffer): void {
+    this._comApiSrv.insertNewOffer(value).subscribe(
+      response => {
+        console.log(response)
+
+      },
+      error => {
+        console.log(error)
+      }
+    )
   }
 
   ngOnInit(): void {
@@ -40,6 +53,10 @@ export class LoginComponent implements OnInit {
 
   goToOffersModeAdmin(username: string): void {
     this._router.navigate(['login/offersAdmin', username])
+  }
+
+  gotToNewOffer(): void{
+    this._router.navigate(['login/new_offer'])
   }
 
 }
