@@ -7,22 +7,39 @@
       <table class="table-responsive">
         <thead>
           <tr>
-            <th scope="col"><h4>#</h4></th>
-            <th scope="col" class="col-md-9"><h5>Ofertas de trabajo</h5></th>
-            <th scope="col" class="col-md-3"><h5>Ver la oferta completa</h5></th>
+            <th
+              scope="col">
+              <h4>#</h4>
+            </th>
+            <th
+              scope="col"
+              class="col-md-9">
+              <h5>Ofertas de trabajo</h5>
+            </th>
+            <th
+              scope="col"
+              class="col-md-3">
+              <h5>Ver la oferta completa</h5>
+            </th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let item of getArrayDataOffers(), let i = index"> <!--Colocar aquí el ngFor-->
-            <th scope="row"><h5>{{i+1}})</h5></th>
-            <td class="p-3"><h4>{{item.titulo}}</h4></td>
+            <th
+              scope="row">
+              <h5>{{i+1}}-</h5>
+            </th>
+            <td
+              class="p-3">
+              <h4>{{item.titulo}}</h4>
+            </td>
             <td
               class="ps-4 p-3"
               *ngIf="!getModeAmin()">
               <button
                   class="btn btn-outline-primary shadow-sm fa fa-eye"
                   style="width: 140px;"
-                  (click)="goToFullOffer(item.id)">
+                  (click)="fullOffer(item.id)">
                   Ver oferta</button>
             </td>
             <td
@@ -38,28 +55,32 @@
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false">
-                    Herramientas Administrador
+                    Administrar
                   </a>
                   <ul
                     class="dropdown-menu fs-5"
                     aria-labelledby="navbarDropdown">
-                    <li>
+                    <li class="p-2 pt-0">
                       <a
-                        class="dropdown-item fa fa-arrow-right"
+                        class="btn dropdown-item fa fa-arrow-right"
                         (click)="gotToNewOffer()">
                         Crear Oferta
                       </a>
                     </li>
-                    <li>
+                    <li class="p-2">
                       <a
-                        class="dropdown-item fa fa-trash-o"
-                        (click)="deleteOneOffer(item.id)">
-                        Borrar Oferta
+                        class="btn dropdown-item fa fa-pencil">
+                        Editar Oferta
                       </a>
                     </li>
                     <li><hr class="dropdown-divider"></li>
-
-                    <li><a class="dropdown-item" >Proximamente</a></li>
+                    <li class="d-flex justify-content-center">
+                      <a
+                        class="btn btn-danger fa fa-trash-o "
+                        (click)="deleteOffer(item.id)">
+                         Borrar Oferta
+                      </a>
+                    </li>
                   </ul>
                 </li>
               </ul>

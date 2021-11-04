@@ -1,11 +1,11 @@
-import { LoginComponent } from './pages/login/login.component';
+import { AdminComponent } from './pages/admin/admin.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { OfferComponent } from './pages/offer/offer.component';
-import { AllOffersComponent } from './pages/alloffers/alloffers.component';
+import { OfferComponent } from './components/offer/offer.component';
 import { LogincardComponent } from './components/logincard/logincard.component';
 import { CreateNewOfferComponent } from './components/create-new-offer/create-new-offer.component';
+import { OfferListComponent } from './components/offerlist/offerlist.component';
 
 const routes: Routes = [
   {
@@ -17,35 +17,18 @@ const routes: Routes = [
     path:'home',
     component: HomeComponent,
     children:[
-      {
-        path:'',
-        component: AllOffersComponent
-      },
-      {
-        path:'offers',
-        component: AllOffersComponent
-      },        {
-        path:'offer/:id',
-        component: OfferComponent
-      },
+      {path:'', component: OfferListComponent},
+      {path:'offers', component: OfferListComponent},
+      {path:'offer/:id', component: OfferComponent}
     ]
   },
   {
     path:'login',
-    component: LoginComponent,
+    component: AdminComponent,
     children:[
-      {
-        path:'',
-        component: LogincardComponent
-      },
-      {
-        path:'offersAdmin/:user',
-        component: AllOffersComponent
-      },
-      {
-        path:'new_offer',
-        component: CreateNewOfferComponent
-      }
+      {path:'', component: LogincardComponent},
+      {path:'login_card', component: LogincardComponent},
+      {path:'new_offer', component: CreateNewOfferComponent}
     ]
   }
 ];

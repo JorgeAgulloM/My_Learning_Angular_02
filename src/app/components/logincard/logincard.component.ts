@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormLogin } from 'src/app/Models/FormLogin';
-import { LoginComponent } from 'src/app/pages/login/login.component';
+import { AdminComponent } from 'src/app/pages/admin/admin.component';
 
 @Component({
   selector: 'app-logincard',
@@ -12,17 +12,17 @@ export class LogincardComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private _loginComp: LoginComponent
+    private _loginComp: AdminComponent
   ) {}
 
   ValidateLogin = this.fb.group({
-    username: ['', Validators.required],
-    password: ['', Validators.required],
+    username: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
+    password: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
     rememberMe: ['']
   })
 
   sendLogin(): void {
-    this._loginComp.postLoginUser(new FormLogin(
+    this._loginComp.loginUser(new FormLogin(
       this.ValidateLogin.value.username,
       this.ValidateLogin.value.password,
       this.ValidateLogin.value.rememberMe

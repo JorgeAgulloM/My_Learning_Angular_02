@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { CommAPIService } from 'src/app/services/comm-api.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -15,14 +16,14 @@ export class HomeComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this._router.navigate(['home/offers'])
+    //this._router.navigate(['home/offers'])
   }
 
   gotToLogin(): void{
     this._router.navigate(['login'])
   }
 
-  goToLogOut(): boolean{
+  CloseSession(): boolean{
     this.gotToHome()
     return this._srvComApi.closeSessionUser()
   }
@@ -31,8 +32,18 @@ export class HomeComponent implements OnInit {
     this._router.navigate(['home'])
   }
 
-  getAdminState(): boolean{
-    return this._srvComApi.getAdminState()
+  UserSessionStatus(): boolean{
+    return this._srvComApi.getUserSessionStataus()
   }
+
+  //Suscripción para ver todas las ofertas
+  getAllOffers(): Observable<any> {
+    return this._srvComApi.getAllOffers()
+  }
+
+  viewFullOffer(id: string): void {
+    this._router.navigate(['home/offer', id])
+  }
+
 
 }

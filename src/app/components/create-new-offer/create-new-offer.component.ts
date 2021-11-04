@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FormNewOffer } from 'src/app/Models/FormNewOffer';
-import { LoginComponent } from 'src/app/pages/login/login.component';
+import { AdminComponent } from 'src/app/pages/admin/admin.component';
 import { CommAPIService } from 'src/app/services/comm-api.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class CreateNewOfferComponent implements OnInit {
     private fb: FormBuilder,
     private _comApiSrv: CommAPIService,
     private _router: Router,
-    private _loginComp: LoginComponent
+    private _loginComp: AdminComponent
   ) { }
 
 
@@ -30,7 +30,7 @@ export class CreateNewOfferComponent implements OnInit {
   })
 
   sendNewOffer(): void {
-    this._loginComp.setNewOffer(new FormNewOffer(
+    this._loginComp.newOffer(new FormNewOffer(
       this.ValidateNewOffer.value.titulo,
       this.ValidateNewOffer.value.descripcion,
       this.ValidateNewOffer.value.empresa,

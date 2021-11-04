@@ -19,11 +19,11 @@ export class NavbarComponent implements OnInit {
   logInAdmin(value: boolean): void {
     value ?
     this._home.gotToLogin() :
-    this._home.goToLogOut()
+    this._home.CloseSession()
   }
 
   getAdminState(): boolean{
-    return this._home.getAdminState()
+    return this._home.UserSessionStatus()
   }
 
   goToHome(): void {

@@ -9,21 +9,19 @@ import { FormNewOffer } from '../Models/FormNewOffer';
 @Injectable({
   providedIn: 'root'
 })
-export class CommAPIService implements OnInit {
+export class CommAPIService {
 
   constructor(
     private _http: HttpClient,
     private _cookie: CookieService
   ) {
-    this._cookie.set('id_token', "null")
-    console.log('Hola')
-  }
-  ngOnInit(): void {
-    console.log('Hola')
+    this.deleteToken()
   }
 
+
+  //################### API REST############################################
   //  HttpClient Observable. Petición Get
-  getDataOffers(): Observable<any> {
+  getAllOffers(): Observable<any> {
     const URL = AppEndPoints.END_POINT_API_OFERTAS
     return this._http.get(URL)
   }
@@ -35,34 +33,14 @@ export class CommAPIService implements OnInit {
   }
 
   //  HttpClient Observable. Petición Post Auth
-  postDataUserLogin(body: FormLogin): Observable<any> {
-    const headers = {'Content-Type':  'application/json', 'Authorization': 'Bearer my-token'}
+  postUserLogin(body: FormLogin): Observable<any> {
+    const headers = {'Content-Type':  'application/json', 'Authorization': 'Bearer id_token'}
     return this._http.post<FormLogin>(AppEndPoints.END_POINT_API_AUTH, JSON.stringify(body), {headers})
-  }
-
-  //  Setter para guardar el token
-  setToken(token: string) {
-    this._cookie.set('id_token', token)
-  }
-
-  //  Getter para obtener el token
-  getToken(): string {
-    return this._cookie.get('id_token')
-  }
-
-  //  Método para cerra la sesión de usuario
-  closeSessionUser(): boolean {
-    this._cookie.set('id_token', "null")
-    return this.getAdminState()
-  }
-
-  //  obtener estado de usuario
-  getAdminState(): boolean {
-    return (this._cookie.get('id_token') != "null")
   }
 
   // HttpClien Observable. Petición Post New Offer
   insertNewOffer(body: FormNewOffer): Observable<any> {
+    console.log(this.getToken())
     const headers = {Authorization: `Bearer ${this.getToken()}`, 'Content-Type': 'application/json'}
     return this._http.post(AppEndPoints.END_POINT_API_NUEVA_OFERTA, JSON.stringify(body), {headers})
   }
@@ -71,7 +49,36 @@ export class CommAPIService implements OnInit {
   deleteOneOffer(id: string): Observable<any> {
     const headers = {Authorization: `Bearer ${this.getToken()}`}
     return this._http.delete(AppEndPoints.END_POINT_API_OFERTAS + `/${id}`, {headers})
+  }
 
+
+
+  //  Setter para guardar el token
+  saveToken(token: string) {
+    this._cookie.set('id_token', token)
+  }
+
+  //  Getter para obtener el token
+  getToken(): string {
+    return this._cookie.get('id_token')
+  }
+
+  //  Setter para eliminar el token al cerar sesión
+  deleteToken(): void {
+    this._cookie.deleteAll()
+  }
+
+  //  Método para cerra la sesión de usuario
+  closeSessionUser(): boolean {
+    this.deleteToken()
+    return this.getUserSessionStataus()
+  }
+
+  //  obtener estado de usuario
+  getUserSessionStataus(): boolean {
+    return (this._cookie.get('id_token') == "null" ||
+            !this._cookie.check('id_token') ||
+            this._cookie.get('id_token').length < 4) ? false : true
   }
 
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { LoginComponent } from 'src/app/pages/login/login.component';
-import { CommAPIService } from 'src/app/services/comm-api.service';
+import { AdminComponent } from 'src/app/pages/admin/admin.component';
+import { HomeComponent } from 'src/app/pages/home/home.component';
 
 @Component({
   selector: 'app-offerslist',
@@ -14,59 +13,44 @@ export class OfferListComponent implements OnInit {
   private modeAmin: boolean
 
   constructor(
-    private _comApiSrv: CommAPIService,
-    private _router: Router,
-    private _actdRouter: ActivatedRoute,
-    private _login: LoginComponent
+    private _home: HomeComponent,
+    private _admin: AdminComponent
     ) {
     this.arrayDataOffers = new Array<any>()
     this.modeAmin = false
   }
 
   ngOnInit(): void {
+    this.setArrayDataOffers()
+    this.setModeAdmin(this._home.UserSessionStatus())
+  }
 
-    this.getDataOffers()
-    this.setModeAdmin(this._comApiSrv.getAdminState())
+  setArrayDataOffers(): void {
+    this._home.getAllOffers().subscribe(
+      respose => {
+        this.arrayDataOffers = respose
+      },
+      error => {
+        this.arrayDataOffers= error
+      }
+    )
   }
 
   getArrayDataOffers(): Array<any> {
     return this.arrayDataOffers
   }
 
-  //Suscripción para ver todas las ofertas
-  getDataOffers(): void{
-    this._comApiSrv.getDataOffers().subscribe(
-      response => {
-        this.arrayDataOffers = response
-      },
-      error => {
-        console.log('ERROR Http = ' + JSON.stringify(error))
-      }
-    )
+  fullOffer(id: string): void {
+    this._home.viewFullOffer(id)
   }
 
-  //  Suscripción para eliminar una oferta
-  deleteOneOffer(id: string): void {
-    // if (this.getConfirmAdminLoged()){
-    this._comApiSrv.deleteOneOffer(id).subscribe(
-      response => {
-        this.getDataOffers()
-      },
-      error => {
-        alert(error)
-
-      }
-    )
-
+  deleteOffer(id: string): void {
+    this._admin.deleteSelectedOffer(id)
   }
 
-
-  goToFullOffer(id: string): void {
-    this._router.navigate(['home/offer', id])
-  }
 
   gotToNewOffer(): void {
-    this._login.gotToNewOffer()
+    this._admin.gotToNewOffer()
   }
 
   getModeAmin(): boolean {

@@ -1,24 +1,50 @@
-<nav class="navbar navbar-expand navbar-light bg-light border-0 shadow ps-3 pe-3 m-3 bg-body rounded">
-  <div class="container-fluid">
-    <a class="navbar-brand fs-2 fw-bold fst-italic" (click)="goToHome()">Empleum</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <div class="navbar-nav me-auto ms-3">
-        <p class="navbar-brand">Tu portal de empleo</p>
-      </div>
-      <form class="d-flex ">
-        <button
 
-        (click)="logInAdmin(false)"
+  <nav
+    class="navbar navbar-expand-lg navbar-dark bg-primary border-0 shadow ps-3 pe-3 m-3  rounded">
+  <div
+    class="container-fluid">
+    <a
+      class="navbar-brand fs-2 fw-bold fst-italic"
+      (click)="goToHome()">
+      Empleum
+    </a>
+    <a
+      *ngIf="!getAdminState()"
+      class="navbar-brand fst-italic mt-3 ms-1"
+      (click)="goToHome()">
+      Tu portal de empleo
+    </a>
+    <a
+      *ngIf="getAdminState()"
+      class="navbar-brand fst-italic mt-3 ms-1"
+      (click)="goToHome()">
+      Modo administrador
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span
+        class="navbar-toggler-icon">
+      </span>
+    </button>
+    <div
+      class="collapse navbar-collapse justify-content-end"
+      id="navbarSupportedContent">
+      <form
+        class="d-flex">
+        <button
+            (click)="logInAdmin(false)"
             class="btn btn-warning fa fa-key fa-4x fw-bold fs-5"
             *ngIf="getAdminState()">
             LogOut
           </button>
         <button
-
-        (click)="logInAdmin(true)"
+            (click)="logInAdmin(true)"
             class="btn btn-success fa fa-user-circle fa-4x fw-bold fs-5"
             *ngIf="!getAdminState()">
             LogIn
@@ -27,3 +53,4 @@
     </div>
   </div>
 </nav>
+
