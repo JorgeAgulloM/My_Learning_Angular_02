@@ -5,7 +5,7 @@
         <div class="row justify-content-center p-2 shadow-lg mt-3 bg-body rounded">
 
           <div class="col-md-12 p-2">
-            <label class="form-control bg-primary text-white">Nueva Oferta. Completa todos los campos</label>
+            <label class="form-control bg-primary text-white shadow rounded-pill">Nueva Oferta. Completa todos los campos</label>
           </div>
           <form class="row"
             name="loginForm"
@@ -13,7 +13,7 @@
             (ngSubmit)="sendNewOffer()">
             <div class="col-md-12">
               <div class="input-group mt-3 form-floating">
-                <input class="form-control col-md-4"
+                <input class="form-control col-md-4 shadow rounded-pill"
                       type="text"
                       name="titulo"
                       formControlName="titulo"
@@ -24,7 +24,7 @@
             </div>
             <div class="col-md-12">
               <div class="input-group mt-3 form-floating">
-                <textarea class="form-control col-md-4"
+                <textarea class="form-control col-md-4 shadow rounded-pill"
                       type="text"
                       name="descripcion"
                       formControlName="descripcion"
@@ -36,7 +36,7 @@
             </div>
             <div class="col-md-6">
               <div class="input-group mt-3 form-floating">
-                <input class="form-control col-md-4"
+                <input class="form-control col-md-4 shadow rounded-pill"
                       type="text"
                       name="empresa"
                       formControlName="empresa"
@@ -47,41 +47,41 @@
             </div>
             <div class="col-md-6">
               <div class="input-group mt-3 form-floating">
-                <input class="form-control col-md-4"
+                <input class="form-control col-md-4 shadow rounded-pill"
                       type="number"
                       name="salario"
                       formControlName="salario"
                       required>
                 <label for="salario"
                       class="form-label">Sueldo bruto anual</label>
-                      <span class="input-group-text"id="email">€</span>
+                      <span class="input-group-text shadow rounded-pill"id="email">€</span>
               </div>
             </div>
             <div class="col-md-6">
               <div class="input-group mt-3 form-floating">
-                <input class="form-control col-md-4"
+                <input class="form-control col-md-4 shadow rounded-pill"
                       type="text"
                       name="ciudad"
                       formControlName="ciudad"
                       required>
                 <label for="ciudad"
-                      class="form-label">Ciudad donde se desempeñará el trabajo</label>
+                      class="form-label">Ciudad del pues de trabajo</label>
               </div>
             </div>
             <div class="col-md-6">
-              <div class="input-group mt-3 form-floating">
-                <input class="form-control col-md-4"
+              <div class="input-group mt-3 form-floating ">
+                <input class="form-control col-md-4 shadow rounded-pill"
                       type="email"
                       name="email"
                       formControlName="email"
                       required>
                 <label for="email"
                       class="form-label">email de la empresa</label>
-                <span class="input-group-text"id="email">@</span>
+                <span class="input-group-text shadow rounded-pill"id="email">@</span>
               </div>
             </div>
             <div class="col-md-4 mt-2">
-              <button class="btn btn-primary m-2"
+              <button class="btn btn-primary m-2 shadow rounded-pill fa fa-pencil"
                       type="submit"
                       data-bs-toggle="tooltip"
                       data-bs-placement="left"
@@ -90,6 +90,15 @@
               </button>
             </div>
           </form>
+          <div class="col-12">
+            <button class="btn btn-primary m-2 ms-3 shadow rounded-pill fa fa-arrow-left"
+                    (click)="goToOffers()"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="left"
+                    title="Volver a las ofertas">
+                    volver
+            </button>
+          </div>
         </div>
       </div>
   </div>

@@ -23,11 +23,13 @@ const routes: Routes = [
     ]
   },
   {
-    path:'login',
+    path:'admin',
     component: AdminComponent,
     children:[
       {path:'', component: LogincardComponent},
       {path:'login_card', component: LogincardComponent},
+      {path:'offers', component: OfferListComponent},
+      {path:'offer/:id', component: OfferComponent},
       {path:'new_offer', component: CreateNewOfferComponent}
     ]
   }

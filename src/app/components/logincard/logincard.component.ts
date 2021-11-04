@@ -36,7 +36,7 @@ export class LogincardComponent implements OnInit {
         this._admin.goToOffers()
       },
       error => {
-        alert(JSON.stringify(error))
+        alert(`Error ${error.status}: ${error.statusText}`)
       }
     )
   }

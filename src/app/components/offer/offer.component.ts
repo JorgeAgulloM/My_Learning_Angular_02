@@ -38,7 +38,7 @@ export class OfferComponent implements OnInit {
         )
       },
       error => {
-        this.dataOffer = error
+        alert(`Error ${error.status}: ${error.statusText}`)
       }
     )
   }

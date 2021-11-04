@@ -1,3 +1,4 @@
+import { HomeComponent } from 'src/app/pages/home/home.component';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormNewOffer } from 'src/app/Models/FormNewOffer';
@@ -12,7 +13,8 @@ export class CreateNewOfferComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private _admin: AdminComponent
+    private _admin: AdminComponent,
+    private _home: HomeComponent
   ) { }
 
 
@@ -22,7 +24,7 @@ export class CreateNewOfferComponent implements OnInit {
     empresa: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
     salario: ['', Validators.required],
     ciudad: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
-    email: ['', Validators.compose([Validators.required, Validators.required])]
+    email: ['', Validators.compose([Validators.required, Validators.email])]
   })
 
   sendNewOffer(): void {
@@ -35,15 +37,23 @@ export class CreateNewOfferComponent implements OnInit {
       this.ValidateNewOffer.value.email,
     )).subscribe(
       response => {
-        this._admin.goToOffers()
+        this.goToOffers()
       },
       error => {
-        alert(JSON.stringify(error))
+        alert(`Error ${error.status}: ${error.statusText}`)
       }
     )
   }
 
   ngOnInit(): void {
+   if(!this._home.UserSessionStatus()) {
+    this._admin.goToOffers()
+    alert('No tienes permiso')
+   }
+  }
+
+  goToOffers(): void {
+    this._admin.goToOffers()
   }
 
 }

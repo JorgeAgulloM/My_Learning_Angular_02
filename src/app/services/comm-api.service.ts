@@ -76,7 +76,7 @@ export class CommAPIService {
 
   //  obtener estado de usuario
   getUserSessionStataus(): boolean {
-    return (this._cookie.get('id_token') == "null" ||
+    return (this._cookie.get('id_token') == null ||
             !this._cookie.check('id_token') ||
             this._cookie.get('id_token').length < 4) ? false : true
   }

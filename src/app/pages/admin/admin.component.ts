@@ -19,8 +19,7 @@ export class AdminComponent implements OnInit {
 
   constructor(
     private _router: Router,
-    private _srvComApi: CommAPIService,
-    private _home: HomeComponent
+    private _srvComApi: CommAPIService
   ) {}
 
 
@@ -45,14 +44,21 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  roloadView(): void {
+    window.location.reload() //esto tiene que ir donde se actualizan los datos
+  }
+
   goToOffers(): void {
-    this._router.navigate(['home/offers'])
+    this._router.navigate(['admin/offers'])
+  }
+
+  viewFullOffer(id: string): void {
+    this._router.navigate(['admin/offer', id])
   }
 
   gotToNewOffer(): void{
-    this._router.navigate(['login/new_offer'])
+    this._router.navigate(['admin/new_offer'])
   }
-
 
 
 }

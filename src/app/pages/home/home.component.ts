@@ -16,11 +16,10 @@ export class HomeComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    //this._router.navigate(['home/offers'])
   }
 
-  gotToLogin(): void{
-    this._router.navigate(['login'])
+  gotToAdmin(): void{
+    this._router.navigate(['admin'])
   }
 
   CloseSession(): boolean{

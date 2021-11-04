@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
 
   logInAdmin(value: boolean): void {
     value ?
-    this._home.gotToLogin() :
+    this._home.gotToAdmin() :
     this._home.CloseSession()
   }
 
