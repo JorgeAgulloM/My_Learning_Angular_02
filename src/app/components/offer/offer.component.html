@@ -1,10 +1,10 @@
-<div class="row d-flex justify-content-center">
+<div class="d-flex justify-content-center">
   <div class="col-8 col-sm-4 d-flex justify-content-center align-items-center">
 
     <div class="row justify-content-center p-2 shadow-lg mt-3 bg-body rounded">
 
       <div class="col-md-12 p-2">
-        <label class="form-control bg-primary text-white"><h3>Oferta Nº {{this.getDataOffer(0)}}</h3></label>
+        <label class="form-control bg-primary text-white rounded-pill"><h3>Oferta Nº {{this.getDataOffer(0)}}</h3></label>
       </div>
 
       <div class="card fs-4" style="width: 40rem;">
@@ -18,12 +18,8 @@
           <li class="list-group-item">{{getDataOffer(4)}}€ brutos al año</li>
           <li class="list-group-item">{{getDataOffer(6)}}</li>
         </ul>
-        <div class="card-body">
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div>
         <div class="col-md-12 mt-4">
-          <button class="btn btn-outline-primary shadow-sm m-2 col-md-2"
+          <button class="btn btn-primary shadow m-2 col-md-2 rounded-pill"
                 (click)="goToHome()">
                   Volver
           </button>

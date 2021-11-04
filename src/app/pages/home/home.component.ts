@@ -41,9 +41,8 @@ export class HomeComponent implements OnInit {
     return this._srvComApi.getAllOffers()
   }
 
-  viewFullOffer(id: string): void {
-    this._router.navigate(['home/offer', id])
+  viewFullOffer(): void {
+    this._router.navigate(['offers'])
   }
-
 
 }

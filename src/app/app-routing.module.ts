@@ -14,6 +14,9 @@ const routes: Routes = [
     pathMatch:'full'
   },
   {
+    path:'',
+    component: HomeComponent},
+  {
     path:'home',
     component: HomeComponent,
     children:[

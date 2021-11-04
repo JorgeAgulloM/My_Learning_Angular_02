@@ -1,9 +1,12 @@
+import { Observable, Subscriber } from 'rxjs';
 import { Router } from '@angular/router';
 import { CommAPIService } from 'src/app/services/comm-api.service';
 import { Component, Injectable, OnInit } from '@angular/core';
 import { FormLogin } from 'src/app/Models/FormLogin'
 import { FormNewOffer } from 'src/app/Models/FormNewOffer';
 import { HomeComponent } from '../home/home.component';
+import { LogincardComponent } from 'src/app/components/logincard/logincard.component';
+import { Form } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -21,20 +24,6 @@ export class AdminComponent implements OnInit {
     private _srvComApi: CommAPIService,
     private _home: HomeComponent
   ) {}
-
-  //  Subscripción para solicitar todas las ofertas
-  loginUser(value: FormLogin): void {
-    this._srvComApi.postUserLogin(value).subscribe(
-      response =>{
-        this._srvComApi.saveToken(response.id_token)
-        this.goToOffers()
-      },
-      error => {
-        'TODO'
-        console.log(error)
-      }
-    )
-  }
 
   //  Suscripción para crear una nueva oferta
   newOffer(value: FormNewOffer): void {
@@ -72,6 +61,10 @@ export class AdminComponent implements OnInit {
 
       }
     )
+  }
+
+  viewFullOffer(): void {
+    this._router.navigate(['offers'])
   }
 
 }

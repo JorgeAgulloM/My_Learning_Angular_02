@@ -41,7 +41,7 @@ export class OfferListComponent implements OnInit {
   }
 
   fullOffer(id: string): void {
-    this._home.viewFullOffer(id)
+    this._home.viewFullOffer()
   }
 
   deleteOffer(id: string): void {
