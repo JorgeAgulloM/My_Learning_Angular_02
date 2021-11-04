@@ -31,7 +31,7 @@ export class OfferListComponent implements OnInit {
         this.arrayDataOffers = respose
       },
       error => {
-        this.arrayDataOffers= error
+        alert(JSON.stringify(error))
       }
     )
   }
@@ -41,13 +41,20 @@ export class OfferListComponent implements OnInit {
   }
 
   fullOffer(id: string): void {
-    this._home.viewFullOffer()
+    this._home.viewFullOffer(id)
   }
 
   deleteOffer(id: string): void {
-    this._admin.deleteSelectedOffer(id)
-  }
+    this._admin.deleteSelectedOffer(id).subscribe(
+      response => {
+        this._home.gotToHome()
+      },
+      error => {
+        alert(JSON.stringify(error))
 
+      }
+    )
+  }
 
   gotToNewOffer(): void {
     this._admin.gotToNewOffer()
@@ -60,6 +67,5 @@ export class OfferListComponent implements OnInit {
   private setModeAdmin(value: boolean): void {
     this.modeAmin = value
   }
-
 
 }

@@ -11,12 +11,12 @@ import { AdminComponent } from 'src/app/pages/admin/admin.component';
 export class CreateNewOfferComponent implements OnInit {
 
   constructor(
-    private _fb: FormBuilder,
-    private _Admin: AdminComponent,
-    private _loginComp: AdminComponent
+    private fb: FormBuilder,
+    private _admin: AdminComponent
   ) { }
 
-  ValidateNewOffer = this._fb.group({
+
+  ValidateNewOffer = this.fb.group({
     titulo: ['', Validators.compose([Validators.required, Validators.maxLength(100)])],
     descripcion: ['', Validators.compose([Validators.required, Validators.maxLength(300)])],
     empresa: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
@@ -26,18 +26,21 @@ export class CreateNewOfferComponent implements OnInit {
   })
 
   sendNewOffer(): void {
-    this._loginComp.newOffer(new FormNewOffer(
+    this._admin.newOffer(new FormNewOffer(
       this.ValidateNewOffer.value.titulo,
       this.ValidateNewOffer.value.descripcion,
       this.ValidateNewOffer.value.empresa,
       this.ValidateNewOffer.value.salario,
       this.ValidateNewOffer.value.ciudad,
       this.ValidateNewOffer.value.email,
-    ))
-  }
-
-  gotToOffers():void {
-    this._Admin.viewFullOffer()
+    )).subscribe(
+      response => {
+        this._admin.goToOffers()
+      },
+      error => {
+        alert(JSON.stringify(error))
+      }
+    )
   }
 
   ngOnInit(): void {

@@ -1,12 +1,10 @@
-import { Observable, Subscriber } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { CommAPIService } from 'src/app/services/comm-api.service';
 import { Component, Injectable, OnInit } from '@angular/core';
 import { FormLogin } from 'src/app/Models/FormLogin'
 import { FormNewOffer } from 'src/app/Models/FormNewOffer';
 import { HomeComponent } from '../home/home.component';
-import { LogincardComponent } from 'src/app/components/logincard/logincard.component';
-import { Form } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -25,17 +23,23 @@ export class AdminComponent implements OnInit {
     private _home: HomeComponent
   ) {}
 
+
+  loginUser(value: FormLogin): Observable<any> {
+    return this._srvComApi.postUserLogin(value)
+  }
+
   //  Suscripción para crear una nueva oferta
-  newOffer(value: FormNewOffer): void {
-    this._srvComApi.insertNewOffer(value).subscribe(
-      response => {
-        console.log(response)
-        this.goToOffers()
-      },
-      error => {
-        console.log(error)
-      }
-    )
+  newOffer(value: FormNewOffer): Observable<any> {
+    return this._srvComApi.insertNewOffer(value)
+  }
+
+  //  Suscripción para eliminar una oferta
+  deleteSelectedOffer(id: string): Observable<any> {
+    return this._srvComApi.deleteOneOffer(id)
+  }
+
+  sendTokenToServer(token: string): void {
+    this._srvComApi.saveToken(token)
   }
 
   ngOnInit(): void {
@@ -49,23 +53,7 @@ export class AdminComponent implements OnInit {
     this._router.navigate(['login/new_offer'])
   }
 
-  //  Suscripción para eliminar una oferta
-  deleteSelectedOffer(id: string): void {
-    // if (this.getConfirmAdminLoged()){
-    this._srvComApi.deleteOneOffer(id).subscribe(
-      response => {
-        this._home.getAllOffers()
-      },
-      error => {
-        alert(error)
 
-      }
-    )
-  }
-
-  viewFullOffer(): void {
-    this._router.navigate(['offers'])
-  }
 
 }
 

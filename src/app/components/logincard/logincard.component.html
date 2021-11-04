@@ -5,7 +5,7 @@
           <div class="row justify-content-center p-2 shadow-lg mt-3 bg-body rounded">
 
             <div class="col-md-12 p-2">
-              <label class="form-control bg-primary text-white rounded-pill">Por favor, introduce tus credenciales</label>
+              <label class="form-control bg-primary text-white">Por favor, introduce tus credenciales</label>
             </div>
 
             <form class="row"
@@ -14,7 +14,7 @@
               (ngSubmit)="sendLogin()">
               <div class="col-md-12">
                 <div class="input-group mt-3 form-floating">
-                  <input class="form-control col-md-4 rounded-pill"
+                  <input class="form-control col-md-4"
                         type="text"
                         name="username"
                         formControlName="username"
@@ -25,11 +25,12 @@
                         title="Introduce el email con el que te registraste">
                   <label for="user"
                         class="form-label">Usuario</label>
-                  <span class="input-group-text rounded-pill"id="email">@</span>
+                  <span class="input-group-text"id="email">@</span>
                 </div>
               </div>
               <div class="input-group col-md-12 mt-3 form-floating">
-                <input class="form-control rounded-pill"
+                <input
+                      class="form-control"
                       [type]="getShowPass() ? 'text' : 'password'"
                       id="loginPassword"
                       formControlName="password"
@@ -38,19 +39,15 @@
                       data-bs-toggle="tooltip"
                       data-bs-placement="left"
                       title="Introduce tu contraseña">
-                      <button
-                              (click)="showPass()"
-                              class="btn btn-primary rounded-pill"
+                      <button class="btn btn-primary rounded-end"
                               type="button"
-                              id="ShowLoginPassword">
+                              id="ShowLoginPassword"
+                              (click)="setShowPass()">
                           <span [class]="getShowPass() ? 'fa fa-eye' : 'fa fa-eye-slash'"></span>
                         </button>
                 <label for="password"
                       class="form-label ms-2">Contraseña</label>
-
               </div>
-              <div [hidden]="getShowPass()"><app-warning></app-warning></div>
-
               <div class="col-12 mt-3">
                 <div class="form-check form-switch">
                   <input class="form-check-input"
@@ -67,7 +64,7 @@
                 </div>
               </div>
               <div class="col-md-12 mt-4">
-                <button class="btn btn-primary m-2 col-md-4 rounded-pill"
+                <button class="btn btn-primary m-2 col-md-4"
                         type="submit"
                         data-bs-toggle="tooltip"
                         data-bs-placement="left"

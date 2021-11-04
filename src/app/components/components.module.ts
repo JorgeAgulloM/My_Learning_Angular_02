@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LogincardComponent } from './logincard/logincard.component';
 import { CreateNewOfferComponent } from './create-new-offer/create-new-offer.component';
-import { WarningComponent } from './warning/warning.component';
+
 
 
 @NgModule({
@@ -14,8 +14,7 @@ import { WarningComponent } from './warning/warning.component';
     OfferListComponent,
     NavbarComponent,
     LogincardComponent,
-    CreateNewOfferComponent,
-    WarningComponent
+    CreateNewOfferComponent
   ],
   imports: [
     CommonModule,
@@ -26,8 +25,7 @@ import { WarningComponent } from './warning/warning.component';
     OfferListComponent,
     NavbarComponent,
     LogincardComponent,
-    CreateNewOfferComponent,
-    WarningComponent
+    CreateNewOfferComponent
   ]
 })
 export class ComponentsModule { }
