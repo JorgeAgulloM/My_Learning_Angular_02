@@ -1,11 +1,11 @@
 <main class="mt-5 mb-5 ">
-    <div class="row d-flex justify-content-center">
-        <div class="col-8 col-sm-4 d-flex justify-content-center align-items-center">
+    <div class="d-flex justify-content-center">
+        <div class="col-8 col-sm-2">
 
           <div class="row justify-content-center p-2 shadow-lg mt-3 bg-body rounded">
 
             <div class="col-md-12 p-2">
-              <label class="form-control bg-primary text-white">Por favor, introduce tus credenciales</label>
+              <label class="form-control bg-primary text-white shadow rounded-pill">Por favor, introduce tus credenciales</label>
             </div>
 
             <form class="row"
@@ -14,7 +14,7 @@
               (ngSubmit)="sendLogin()">
               <div class="col-md-12">
                 <div class="input-group mt-3 form-floating">
-                  <input class="form-control col-md-4"
+                  <input class="form-control col-md-4 shadow rounded-pill"
                         type="text"
                         name="username"
                         formControlName="username"
@@ -25,12 +25,12 @@
                         title="Introduce el email con el que te registraste">
                   <label for="user"
                         class="form-label">Usuario</label>
-                  <span class="input-group-text"id="email">@</span>
+                  <span class="input-group-text shadow rounded-pill"id="email">@</span>
                 </div>
               </div>
               <div class="input-group col-md-12 mt-3 form-floating">
                 <input
-                      class="form-control"
+                      class="form-control shadow rounded-pill"
                       [type]="getShowPass() ? 'text' : 'password'"
                       id="loginPassword"
                       formControlName="password"
@@ -39,7 +39,7 @@
                       data-bs-toggle="tooltip"
                       data-bs-placement="left"
                       title="Introduce tu contraseña">
-                      <button class="btn btn-primary rounded-end"
+                      <button class="btn btn-primary shadow rounded-pill"
                               type="button"
                               id="ShowLoginPassword"
                               (click)="setShowPass()">
@@ -64,7 +64,7 @@
                 </div>
               </div>
               <div class="col-md-12 mt-4">
-                <button class="btn btn-primary m-2 col-md-4"
+                <button class="btn btn-primary m-2 col-md-4 shadow rounded-pill"
                         type="submit"
                         data-bs-toggle="tooltip"
                         data-bs-placement="left"

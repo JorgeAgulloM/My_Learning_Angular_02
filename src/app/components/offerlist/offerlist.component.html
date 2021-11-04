@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row d-flex justify-content-center">
-    <div class="col-md-10 mt-4 border shadow p-3 mb-5 bg-body rounded">
+    <div class="col-md-10 mt-4 border shadow p-3 mb-5 bg-body rounded-3">
       <div class="col-md-12 p-2">
-        <label class="form-control bg-primary text-white"><h3>Listado de las ofertas de trabajo deisponibles</h3></label>
+        <label class="form-control bg-primary text-white shadow rounded-pill"><h3>Listado de las ofertas de trabajo deisponibles</h3></label>
       </div>
-      <table class="table-responsive">
+      <table class="table-responsive ms-5">
         <thead>
           <tr>
             <th
@@ -37,7 +37,7 @@
               class="ps-4 p-3"
               *ngIf="!getModeAmin()">
               <button
-                  class="btn btn-outline-primary shadow-sm fa fa-eye"
+                  class="btn btn-outline-primary fa fa-eye shadow rounded-pill"
                   style="width: 140px;"
                   (click)="fullOffer(item.id)">
                   Ver oferta</button>
@@ -49,34 +49,41 @@
                 class="navbar-nav me-2">
                 <li
                   class="nav-item dropdown">
-                  <a
-                    class="btn btn-primary dropdown-toggle fa-4x fa fa-wrench fs-5"
+                  <button
+                    class="btn btn-primary dropdown-toggle fa-4x fa fa-wrench fs-5 shadow rounded-pill"
                     id="navbarDropdown"
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false">
                     Administrar
-                  </a>
+                  </button>
                   <ul
-                    class="dropdown-menu fs-5"
+                    class="dropdown-menu fs-5 shadow rounded-3"
                     aria-labelledby="navbarDropdown">
-                    <li class="p-2 pt-0">
+                    <li class="p-2 pt-0 d-flex justify-content-center">
                       <a
-                        class="btn dropdown-item fa fa-arrow-right"
+                        class="btn btn-primary fa fa-arrow-right shadow rounded-pill"
+                        (click)="fullOffer(item.id)">
+                        Ver Oferta
+                      </a>
+                    </li>
+                    <li class="p-2 d-flex justify-content-center">
+                      <a
+                        class="btn btn-primary fa fa-arrow-right shadow rounded-pill"
                         (click)="gotToNewOffer()">
                         Crear Oferta
                       </a>
                     </li>
-                    <li class="p-2">
+                    <li class="p-2 d-flex justify-content-center">
                       <a
-                        class="btn dropdown-item fa fa-pencil">
+                        class="btn btn-primary fa fa-pencil shadow rounded-pill">
                         Editar Oferta
                       </a>
                     </li>
                     <li><hr class="dropdown-divider"></li>
                     <li class="d-flex justify-content-center">
                       <a
-                        class="btn btn-danger fa fa-trash-o "
+                        class="btn btn-danger fa fa-trash-o shadow rounded-pill"
                         (click)="deleteOffer(item.id)">
                          Borrar Oferta
                       </a>
