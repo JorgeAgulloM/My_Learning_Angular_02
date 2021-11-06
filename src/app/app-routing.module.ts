@@ -30,7 +30,8 @@ const routes: Routes = [
       {path:'login_card', component: LogincardComponent},
       {path:'offers', component: OfferListComponent},
       {path:'offer/:id', component: OfferComponent},
-      {path:'new_offer', component: CreateNewOfferComponent}
+      {path:'new_offer', component: CreateNewOfferComponent},
+      {path:'edith_offer/:id', component: CreateNewOfferComponent}
     ]
   }
 ];

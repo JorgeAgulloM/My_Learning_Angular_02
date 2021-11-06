@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { PRIMARY_OUTLET } from '@angular/router';
 import { AdminComponent } from 'src/app/pages/admin/admin.component';
 import { HomeComponent } from 'src/app/pages/home/home.component';
 import Swal from 'sweetalert2';
@@ -42,7 +41,9 @@ export class OfferListComponent implements OnInit {
     return this.arrayDataOffers
   }
 
-
+  goToEdith(id: string, body: Array<string>): void{
+    this._admin.gotToNewOfferForEdith(id, body)
+  }
 
   deleteOffer(id: string): void {
 
@@ -50,20 +51,31 @@ export class OfferListComponent implements OnInit {
       title: '¿Estas seguro de eleminar la oferta?',
       icon:'warning',
       showCancelButton: true,
+      cancelButtonColor:'#d33',
       confirmButtonColor: '#3085d6',
       confirmButtonText: 'Si, borrar la oferta'
     }).then(
-      response => {
-        this._admin.deleteSelectedOffer(id).subscribe(
+      _comfirmed => {
+        _comfirmed.isConfirmed ? this._admin.deleteSelectedOffer(id).subscribe(
           response => {
-            Swal.fire('Oferta eliminada correctamente','success')
-            this.reeload()
+            Swal.fire({
+              title: 'Oferta eliminada correctamente',
+              icon: 'success',
+              confirmButtonColor: '#3085d6'
+            }).then(
+              _exit =>{
+                this.reeload()
+              }
+            )
           },
-          error => {
-            alert(`Error ${error.status}: ${error.statusText}`)
-
+          _error => {
+            alert(`Error al eliminar la oferta: ${_error}`)
           }
-        )
+        ) : Swal.fire({
+              title: 'Se cancela la eliminación',
+              icon: 'info',
+              confirmButtonColor: '#3085d6'
+            })
       }
     )
   }

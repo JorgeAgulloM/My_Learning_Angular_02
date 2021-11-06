@@ -19,7 +19,7 @@
     </a>
     <a
       *ngIf="getAdminState()"
-      class="navbar-brand fst-italic mt-3 ms-1"
+      class="navbar-brand text-warning fs-4 fst-italic mt-3 ms-1"
       (click)="goToHome()">
       Modo administrador
     </a>
@@ -43,7 +43,10 @@
         <button
             (click)="logInAdmin(false)"
             class="btn btn-warning fa fa-key fa-4x fw-bold fs-5 shadow rounded-pill"
-            *ngIf="getAdminState()">
+            *ngIf="getAdminState()"
+            data-bs-toggle="tooltip"
+            data-bs-placement="left"
+            title="salir">
             LogOut
           </button>
         <button

@@ -17,19 +17,31 @@ import { HomeComponent } from '../home/home.component';
 })
 export class AdminComponent implements OnInit {
 
+  private offerForEdith: Array<string>
+
   constructor(
     private _router: Router,
     private _srvComApi: CommAPIService
-  ) {}
-
+  ) {
+    this.offerForEdith = Array<string>()
+  }
 
   loginUser(value: FormLogin): Observable<any> {
     return this._srvComApi.postUserLogin(value)
   }
 
+  kickUser(): void {
+    this._srvComApi.closeSessionUser()
+  }
+
   //  Suscripción para crear una nueva oferta
   newOffer(value: FormNewOffer): Observable<any> {
     return this._srvComApi.insertNewOffer(value)
+  }
+
+  //  Suscripción para crear una nueva oferta
+  edthiOffer(id: string, value: FormNewOffer): Observable<any> {
+    return this._srvComApi.edithNewOffer(id, value)
   }
 
   //  Suscripción para eliminar una oferta
@@ -60,6 +72,14 @@ export class AdminComponent implements OnInit {
     this._router.navigate(['admin/new_offer'])
   }
 
+  gotToNewOfferForEdith(id: string, body: Array<string>): void{
+    this.offerForEdith = body
+    this._router.navigate(['admin/edith_offer', id])
+  }
+
+  geTofferForEdith(): Array<string> {
+    return this.offerForEdith
+  }
 
 }
 

@@ -23,12 +23,15 @@ export class CommAPIService {
   //  HttpClient Observable. Petición Get
   getAllOffers(): Observable<any> {
     const URL = AppEndPoints.END_POINT_API_OFERTAS
+    //const URL = AppEndPoints.END_POINT_API_OFERTAS_API_JM
     return this._http.get(URL)
   }
 
   //  HttpClient Observable. Petición Get/id
   getDataOfferID(id: string): Observable<any> {
     const URL = AppEndPoints.END_POINT_API_OFERTAS + `/${id}`
+    console.log(this._http.get(URL))
+    //const URL = AppEndPoints.END_POINT_API_OFERTAS_API_JM + `/${id}`
     return this._http.get(URL)
   }
 
@@ -36,21 +39,31 @@ export class CommAPIService {
   postUserLogin(body: FormLogin): Observable<any> {
     const headers = {'Content-Type':  'application/json', 'Authorization': 'Bearer id_token'}
     return this._http.post<FormLogin>(AppEndPoints.END_POINT_API_AUTH, JSON.stringify(body), {headers})
+    //return this._http.post<FormLogin>(AppEndPoints.END_POINT_API_AUTH_API_JM, JSON.stringify(body), {headers})
   }
 
   // HttpClien Observable. Petición Post New Offer
   insertNewOffer(body: FormNewOffer): Observable<any> {
-    console.log(this.getToken())
     const headers = {Authorization: `Bearer ${this.getToken()}`, 'Content-Type': 'application/json'}
     return this._http.post(AppEndPoints.END_POINT_API_NUEVA_OFERTA, JSON.stringify(body), {headers})
+    //return this._http.post(AppEndPoints.END_POINT_API_NUEVA_OFERTA_API_JM, JSON.stringify(body), {headers})
   }
 
   // HttpClien Observable. Petición Delete
   deleteOneOffer(id: string): Observable<any> {
+    console.log(id)
     const headers = {Authorization: `Bearer ${this.getToken()}`}
     return this._http.delete(AppEndPoints.END_POINT_API_OFERTAS + `/${id}`, {headers})
+    //return this._http.delete(AppEndPoints.END_POINT_API_OFERTAS_API_JM + `/${id}`, {headers})
   }
 
+  // HttpClien Observable. Petición Post New Offer
+  edithNewOffer(id: string, body: FormNewOffer): Observable<any> {
+    console.log(id, body)
+    const headers = {Authorization: `Bearer ${this.getToken()}`, 'Content-Type': 'application/json'}
+    return this._http.put(AppEndPoints.END_POINT_API_OFERTAS + `/${id}`, JSON.stringify(body), {headers})
+    //return this._http.post(AppEndPoints.END_POINT_API_NUEVA_OFERTA_API_JM, JSON.stringify(body), {headers})
+  }
 
 
   //  Setter para guardar el token

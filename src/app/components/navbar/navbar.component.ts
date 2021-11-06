@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { HomeComponent } from 'src/app/pages/home/home.component';
 
 @Component({
@@ -7,14 +7,12 @@ import { HomeComponent } from 'src/app/pages/home/home.component';
   styleUrls: ['./navbar.component.css'],
   providers: [HomeComponent]
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
 
   constructor(
     private _home: HomeComponent
-  )
-  { }
-
+  ){ }
 
   logInAdmin(value: boolean): void {
     value ?
@@ -28,9 +26,6 @@ export class NavbarComponent implements OnInit {
 
   goToHome(): void {
     this._home.gotToHome()
-  }
-
-  ngOnInit(): void {
   }
 
 }

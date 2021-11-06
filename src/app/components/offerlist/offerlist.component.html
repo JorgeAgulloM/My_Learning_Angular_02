@@ -2,7 +2,15 @@
   <div class="row d-flex justify-content-center">
     <div class="col-md-10 mt-4 border shadow p-3 mb-5 bg-body rounded-3">
       <div class="col-md-12 p-2">
-        <label class="form-control bg-primary text-white shadow rounded-pill"><h3>Listado de las ofertas de trabajo deisponibles</h3></label>
+        <label class="navbar bg-primary text-white shadow rounded-pill"><h3 class="ms-4">Listado de las ofertas de trabajo deisponibles</h3>
+          <div *ngIf="getModeAmin()" class="p-2 d-flex justify-content-center">
+            <button
+              class="btn btn-success fa fa-arrow-right shadow rounded-pill me-3"
+              (click)="gotToNewOffer()">
+              Crear Oferta
+            </button>
+          </div>
+        </label>
       </div>
       <table class="table-responsive ms-5">
         <thead>
@@ -69,14 +77,8 @@
                     </li>
                     <li class="p-2 d-flex justify-content-center">
                       <a
-                        class="btn btn-primary fa fa-arrow-right shadow rounded-pill"
-                        (click)="gotToNewOffer()">
-                        Crear Oferta
-                      </a>
-                    </li>
-                    <li class="p-2 d-flex justify-content-center">
-                      <a
-                        class="btn btn-primary fa fa-pencil shadow rounded-pill">
+                        class="btn btn-primary fa fa-pencil shadow rounded-pill"
+                        (click)="goToEdith(item.id, item)">
                         Editar Oferta
                       </a>
                     </li>

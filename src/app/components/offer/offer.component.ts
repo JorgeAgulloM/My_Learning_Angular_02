@@ -14,15 +14,15 @@ export class OfferComponent implements OnInit {
   constructor(
     private _comApiSrv: CommAPIService,
     private _router: Router,
-    private _actdRoute: ActivatedRoute
+    private _actvRouter: ActivatedRoute
     ) {
       this.dataOffer = new Array<any>()
      }
 
   ngOnInit(): void {
     console.log('Inicio de offer')
-    this.getDataOfferID(this._actdRoute.snapshot.paramMap.get('id')!)
-    console.log('offer Init' + this._actdRoute.snapshot.paramMap.get('id')!)
+    this.getDataOfferID(this._actvRouter.snapshot.paramMap.get('id')!)
+    console.log('offer Init' + this._actvRouter.snapshot.paramMap.get('id')!)
   }
 
   getDataOffer(value: number): string {
@@ -44,7 +44,10 @@ export class OfferComponent implements OnInit {
   }
 
   goToHome(): void {
-    this._router.navigate(['/home'])
+    console.log(this._router.url + `/admin/offer/${this.dataOffer[0]}`)
+    this._router.url == `/admin/offer/${this.dataOffer[0]}` ?
+    this._router.navigate(['admin/offers']) :
+    this._router.navigate(['home'])
   }
 
 }
