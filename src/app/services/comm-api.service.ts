@@ -22,17 +22,15 @@ export class CommAPIService {
   //################### API REST############################################
   //  HttpClient Observable. Petición Get
   getAllOffers(): Observable<any> {
-    const URL = AppEndPoints.END_POINT_API_OFERTAS
+    console.log('C.Blanca: Service - Se recibe llamada/petición Get')
     //const URL = AppEndPoints.END_POINT_API_OFERTAS_API_JM
-    return this._http.get(URL)
+    return this._http.get(AppEndPoints.END_POINT_API_OFERTAS)
   }
 
   //  HttpClient Observable. Petición Get/id
   getDataOfferID(id: string): Observable<any> {
-    const URL = AppEndPoints.END_POINT_API_OFERTAS + `/${id}`
-    console.log(this._http.get(URL))
     //const URL = AppEndPoints.END_POINT_API_OFERTAS_API_JM + `/${id}`
-    return this._http.get(URL)
+    return this._http.get(AppEndPoints.END_POINT_API_OFERTAS + `/${id}`)
   }
 
   //  HttpClient Observable. Petición Post Auth
@@ -44,6 +42,7 @@ export class CommAPIService {
 
   // HttpClien Observable. Petición Post New Offer
   insertNewOffer(body: FormNewOffer): Observable<any> {
+    console.log('C.Blanca: service/insert - Se recibe petición y datos para insertar nueva oferta en API. Se envian.')
     const headers = {Authorization: `Bearer ${this.getToken()}`, 'Content-Type': 'application/json'}
     return this._http.post(AppEndPoints.END_POINT_API_NUEVA_OFERTA, JSON.stringify(body), {headers})
     //return this._http.post(AppEndPoints.END_POINT_API_NUEVA_OFERTA_API_JM, JSON.stringify(body), {headers})

@@ -41,7 +41,7 @@
       <form
         class="d-flex">
         <button
-            (click)="logInAdmin(false)"
+            (click)="logOutAdmin()"
             class="btn btn-warning fa fa-key fa-4x fw-bold fs-5 shadow rounded-pill"
             *ngIf="getAdminState()"
             data-bs-toggle="tooltip"
@@ -50,7 +50,7 @@
             LogOut
           </button>
         <button
-            (click)="logInAdmin(true)"
+            (click)="logInAdmin()"
             class="btn btn-success fa fa-user-circle fa-4x fw-bold fs-5 shadow rounded-pill"
             *ngIf="!getAdminState()"
             data-bs-toggle="tooltip"

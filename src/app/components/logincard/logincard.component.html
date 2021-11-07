@@ -64,13 +64,15 @@
                 </div>
               </div>
               <div class="col-md-12 mt-4">
-                <button class="btn btn-primary m-2 col-md-4 shadow rounded-pill"
+                <button [disabled]="this.isLoading"
+                        class="btn btn-primary m-2 col-md-4 shadow rounded-pill"
                         type="submit"
                         data-bs-toggle="tooltip"
                         data-bs-placement="left"
                         title="Si lo ves, pulsa para entrar">
+                        <span *ngIf="this.isLoading" class="spinner-border spinner-border-sm mr-1"></span>
                         Login
-                      </button>
+                </button>
               </div>
             </form>
           </div>

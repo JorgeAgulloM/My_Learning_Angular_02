@@ -1,3 +1,4 @@
+import { AgmCoreModule } from '@agm/core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommAPIService } from 'src/app/services/comm-api.service';
@@ -5,11 +6,15 @@ import { CommAPIService } from 'src/app/services/comm-api.service';
 @Component({
   selector: 'app-offer',
   templateUrl: './offer.component.html',
-  styleUrls: ['./offer.component.css']
+  styleUrls: ['./offer.component.css'],
+  providers: [AgmCoreModule]
 })
 export class OfferComponent implements OnInit {
 
   private dataOffer: Array<any>
+
+  lat = 51.678418;
+  lng = 7.809007;
 
   constructor(
     private _comApiSrv: CommAPIService,

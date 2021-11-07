@@ -27,9 +27,12 @@ export class OfferListComponent implements OnInit {
   }
 
   setArrayDataOffers(): void {
+    console.log('C.Blanca: Offers - Se llama a Home solicitando un Get desde servicio')
     this._home.getAllOffers().subscribe(
       respose => {
+        console.log('C.Blanca: Offers - Se recibe la respuesta desde get/service/home')
         this.arrayDataOffers = respose
+        console.log('C.Blanca: Offers - Se cargan los datos al array para distribuirlos :', this.arrayDataOffers)
       },
       error => {
         alert(`Error ${error.status}: ${error.statusText}`)
@@ -42,6 +45,8 @@ export class OfferListComponent implements OnInit {
   }
 
   goToEdith(id: string, body: Array<string>): void{
+    console.log('C.Blanca: offers - desde html solicita el acceso a new_offer')
+    console.log('C.Blanca: offers - llama a admin para acceder a new_offer')
     this._admin.gotToNewOfferForEdith(id, body)
   }
 

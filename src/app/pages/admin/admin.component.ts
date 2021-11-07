@@ -36,6 +36,7 @@ export class AdminComponent implements OnInit {
 
   //  Suscripción para crear una nueva oferta
   newOffer(value: FormNewOffer): Observable<any> {
+    console.log('C.Blanca: Admin - Se recive petición de nueva oferta, se solicita y se pasan los datos a service.')
     return this._srvComApi.insertNewOffer(value)
   }
 
@@ -73,7 +74,9 @@ export class AdminComponent implements OnInit {
   }
 
   gotToNewOfferForEdith(id: string, body: Array<string>): void{
+    console.log('C.Blanca: admin - desde offers solicita el acceso a new_offer')
     this.offerForEdith = body
+    console.log('C.Blanca: admin - se cargan los datos recibidos por parametro')
     this._router.navigate(['admin/edith_offer', id])
   }
 

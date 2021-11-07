@@ -14,9 +14,11 @@ export class NavbarComponent {
     private _home: HomeComponent
   ){ }
 
-  logInAdmin(value: boolean): void {
-    value ?
-    this._home.gotToAdmin() :
+  logInAdmin(): void {
+    this._home.gotToAdmin()
+  }
+
+  logOutAdmin():void {
     this._home.CloseSession()
   }
 

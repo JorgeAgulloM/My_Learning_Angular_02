@@ -93,19 +93,19 @@
               </form>
             </div>
             <div>
-              <label class="form-label alert alert-warning"> Jose, Despues de hacer todo lo necesario para esta petición no me funciona,
+              <label *ngIf="getEdithOfferMode()" class="form-label alert alert-warning"> Jose, Despues de hacer todo lo necesario para esta petición no me funciona,
                 y me devuelve un 405, así que entiendo que de alguna forma el API que nos pasaron lo tiene capado, supongo, porque si he
                 encontrado la consulta PutMaping.</label>
             </div>
             <div class="col-md-5 mt-2">
-              <button class="btn btn-primary m-2 shadow rounded-pill fa fa-pencil"
+              <button [disabled]="this.isLoading"
+                      class="btn btn-primary m-2 shadow rounded-pill fa fa-pencil"
                       type="submit"
                       data-bs-toggle="tooltip"
                       data-bs-placement="left"
                       title="Crear"
                       [disabled]="getEdithOfferMode() || !ValidateNewOffer.valid" ><!--Capado completamente para edición-->
-
-
+                      <span *ngIf="this.isLoading" class="spinner-border spinner-border-sm mr-1"></span>
                       {{!getEdithOfferMode() ? 'Crear oferta' : 'Editar Oferta'}}
               </button>
             </div>

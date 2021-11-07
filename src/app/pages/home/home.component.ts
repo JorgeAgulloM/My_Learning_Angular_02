@@ -37,6 +37,7 @@ export class HomeComponent implements OnInit {
 
   //Suscripción para ver todas las ofertas
   getAllOffers(): Observable<any> {
+    console.log('C.Blanca: Home - Se recibe petición Get. Se llama al servicio/petición Get')
     return this._srvComApi.getAllOffers()
   }
 

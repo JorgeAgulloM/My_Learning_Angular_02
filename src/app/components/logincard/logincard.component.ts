@@ -11,6 +11,7 @@ import { AdminComponent } from 'src/app/pages/admin/admin.component';
 export class LogincardComponent implements OnInit {
 
   private showPass: boolean
+  isLoading = false
 
   constructor(
     private fb: FormBuilder,
@@ -26,6 +27,7 @@ export class LogincardComponent implements OnInit {
   })
 
   sendLogin(): void {
+    this.isLoading = true
     this._admin.loginUser(new FormLogin(
       this.ValidateLogin.value.username,
       this.ValidateLogin.value.password,
@@ -34,8 +36,10 @@ export class LogincardComponent implements OnInit {
       response =>{
         this._admin.sendTokenToServer(response.id_token)
         this._admin.goToOffers()
+        this.isLoading = false
       },
       error => {
+        this.isLoading = false
         alert(`Error ${error.status}: ${error.statusText}`)
       }
     )
