@@ -1,23 +1,20 @@
-import { AgmCoreModule } from '@agm/core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CommAPIService } from 'src/app/services/comm-api.service';
+import { HomeComponent } from 'src/app/pages/home/home.component';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-offer',
   templateUrl: './offer.component.html',
-  styleUrls: ['./offer.component.css'],
-  providers: [AgmCoreModule]
+  styleUrls: ['./offer.component.css']
 })
 export class OfferComponent implements OnInit {
 
   private dataOffer: Array<any>
 
-  lat = 51.678418;
-  lng = 7.809007;
-
   constructor(
-    private _comApiSrv: CommAPIService,
+    private _home: HomeComponent,
     private _router: Router,
     private _actvRouter: ActivatedRoute
     ) {
@@ -25,29 +22,37 @@ export class OfferComponent implements OnInit {
      }
 
   ngOnInit(): void {
-    console.log('Inicio de offer')
+    //Se llama a la carga de los datos de la oferta selecionada
     this.getDataOfferID(this._actvRouter.snapshot.paramMap.get('id')!)
-    console.log('offer Init' + this._actvRouter.snapshot.paramMap.get('id')!)
   }
 
+  //Se devuelven los datos de la oferta
   getDataOffer(value: number): string {
     return this.dataOffer[value]
   }
 
-  //Suscripción
+  //Se cargan los datos de la oferta
   getDataOfferID(id: string): void{
-    this._comApiSrv.getDataOfferID(id).subscribe(
+    this._home.getOfferId(id).subscribe(
       response =>{
+        //Si la respuesta el correcta, se cargan los datos del diccionario en el array local
         Object.entries(response).forEach(
           ([key, value]) => this.dataOffer.push(value)
         )
       },
       error => {
-        alert(`Error ${error.status}: ${error.statusText}`)
+        //En caso de error se muestra una alerta al usuario.
+        Swal.fire({
+          icon: 'error',
+          title: `Oops... Error ${error.status}`,
+          text: 'Error en la carga de datos, no se ha podido cargar la oferta.',
+          footer: '<a href="">Why do I have this issue?</a>'
+        })
       }
     )
   }
 
+  //Volver a Home o admin
   goToHome(): void {
     console.log(this._router.url + `/admin/offer/${this.dataOffer[0]}`)
     this._router.url == `/admin/offer/${this.dataOffer[0]}` ?

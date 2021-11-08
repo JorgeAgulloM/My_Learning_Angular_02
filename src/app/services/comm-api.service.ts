@@ -19,17 +19,15 @@ export class CommAPIService {
   }
 
 
-  //################### API REST############################################
+  //################### API ofertas de trabajo ############################################
   //  HttpClient Observable. Petición Get
   getAllOffers(): Observable<any> {
     console.log('C.Blanca: Service - Se recibe llamada/petición Get')
-    //const URL = AppEndPoints.END_POINT_API_OFERTAS_API_JM
     return this._http.get(AppEndPoints.END_POINT_API_OFERTAS)
   }
 
   //  HttpClient Observable. Petición Get/id
   getDataOfferID(id: string): Observable<any> {
-    //const URL = AppEndPoints.END_POINT_API_OFERTAS_API_JM + `/${id}`
     return this._http.get(AppEndPoints.END_POINT_API_OFERTAS + `/${id}`)
   }
 
@@ -37,7 +35,6 @@ export class CommAPIService {
   postUserLogin(body: FormLogin): Observable<any> {
     const headers = {'Content-Type':  'application/json', 'Authorization': 'Bearer id_token'}
     return this._http.post<FormLogin>(AppEndPoints.END_POINT_API_AUTH, JSON.stringify(body), {headers})
-    //return this._http.post<FormLogin>(AppEndPoints.END_POINT_API_AUTH_API_JM, JSON.stringify(body), {headers})
   }
 
   // HttpClien Observable. Petición Post New Offer
@@ -45,7 +42,6 @@ export class CommAPIService {
     console.log('C.Blanca: service/insert - Se recibe petición y datos para insertar nueva oferta en API. Se envian.')
     const headers = {Authorization: `Bearer ${this.getToken()}`, 'Content-Type': 'application/json'}
     return this._http.post(AppEndPoints.END_POINT_API_NUEVA_OFERTA, JSON.stringify(body), {headers})
-    //return this._http.post(AppEndPoints.END_POINT_API_NUEVA_OFERTA_API_JM, JSON.stringify(body), {headers})
   }
 
   // HttpClien Observable. Petición Delete
@@ -53,7 +49,6 @@ export class CommAPIService {
     console.log(id)
     const headers = {Authorization: `Bearer ${this.getToken()}`}
     return this._http.delete(AppEndPoints.END_POINT_API_OFERTAS + `/${id}`, {headers})
-    //return this._http.delete(AppEndPoints.END_POINT_API_OFERTAS_API_JM + `/${id}`, {headers})
   }
 
   // HttpClien Observable. Petición Post New Offer
@@ -61,7 +56,6 @@ export class CommAPIService {
     console.log(id, body)
     const headers = {Authorization: `Bearer ${this.getToken()}`, 'Content-Type': 'application/json'}
     return this._http.put(AppEndPoints.END_POINT_API_OFERTAS + `/${id}`, JSON.stringify(body), {headers})
-    //return this._http.post(AppEndPoints.END_POINT_API_NUEVA_OFERTA_API_JM, JSON.stringify(body), {headers})
   }
 
 
@@ -75,7 +69,7 @@ export class CommAPIService {
     return this._cookie.get('id_token')
   }
 
-  //  Setter para eliminar el token al cerar sesión
+  //  Setter para eliminar el token al cerrar sesión
   deleteToken(): void {
     this._cookie.deleteAll()
   }
@@ -86,7 +80,7 @@ export class CommAPIService {
     return this.getUserSessionStataus()
   }
 
-  //  obtener estado de usuario
+  //  obtener estado de usuario según disponibilidad del token
   getUserSessionStataus(): boolean {
     return (this._cookie.get('id_token') == null ||
             !this._cookie.check('id_token') ||

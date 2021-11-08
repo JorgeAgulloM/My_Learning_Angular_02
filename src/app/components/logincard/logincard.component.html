@@ -64,7 +64,7 @@
                 </div>
               </div>
               <div class="col-md-12 mt-4">
-                <button [disabled]="this.isLoading"
+                <button [disabled]="this.isLoading || !this.ValidateLogin.valid"
                         class="btn btn-primary m-2 col-md-4 shadow rounded-pill"
                         type="submit"
                         data-bs-toggle="tooltip"
