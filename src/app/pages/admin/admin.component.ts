@@ -28,10 +28,10 @@ export class AdminComponent {
     this.offerForEdith = Array<string>()
   }
 
+  //Obtine la una de las imagenes del API de imagenes
   getImageRandom(): string {
     let hour: number = new Date().getMinutes()
-    let n: number = Math.trunc(hour/3)
-    return this._srvImages.getRandomImage(n)
+    return this._srvImages.getRandomImage(Math.trunc(hour/3))
   }
 
   //  Se solicita al servicio el login de usuario

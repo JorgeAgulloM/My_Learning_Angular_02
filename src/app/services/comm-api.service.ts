@@ -20,9 +20,17 @@ export class CommAPIService {
 
 
   //################### API ofertas de trabajo ############################################
+
+  /* NOTA* Jose, se que en el taller aconsejaste usar los models en vez de objetos any
+  para los observables, pero dado que ya lo tenia así y funcionando, y el tiempo escasea,
+  he preferido dejarlo así. */
+
+
   //  HttpClient Observable. Petición Get
   getAllOffers(): Observable<any> {
+    //Comprobaciones de caja blanca
     console.log('C.Blanca: Service - Se recibe llamada/petición Get')
+
     return this._http.get(AppEndPoints.END_POINT_API_OFERTAS)
   }
 
@@ -33,29 +41,29 @@ export class CommAPIService {
 
   //  HttpClient Observable. Petición Post Auth
   postUserLogin(body: FormLogin): Observable<any> {
-    const headers = {'Content-Type':  'application/json', 'Authorization': 'Bearer id_token'}
-    return this._http.post<FormLogin>(AppEndPoints.END_POINT_API_AUTH, JSON.stringify(body), {headers})
+    const headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer id_token' }
+    return this._http.post<FormLogin>(AppEndPoints.END_POINT_API_AUTH, JSON.stringify(body), { headers })
   }
 
   // HttpClien Observable. Petición Post New Offer
   insertNewOffer(body: FormNewOffer): Observable<any> {
+    //Comprobaciones de caja blanca
     console.log('C.Blanca: service/insert - Se recibe petición y datos para insertar nueva oferta en API. Se envian.')
-    const headers = {Authorization: `Bearer ${this.getToken()}`, 'Content-Type': 'application/json'}
-    return this._http.post(AppEndPoints.END_POINT_API_NUEVA_OFERTA, JSON.stringify(body), {headers})
+
+    const headers = { Authorization: `Bearer ${this.getToken()}`, 'Content-Type': 'application/json' }
+    return this._http.post(AppEndPoints.END_POINT_API_NUEVA_OFERTA, JSON.stringify(body), { headers })
   }
 
   // HttpClien Observable. Petición Delete
   deleteOneOffer(id: string): Observable<any> {
-    console.log(id)
-    const headers = {Authorization: `Bearer ${this.getToken()}`}
-    return this._http.delete(AppEndPoints.END_POINT_API_OFERTAS + `/${id}`, {headers})
+    const headers = { Authorization: `Bearer ${this.getToken()}` }
+    return this._http.delete(AppEndPoints.END_POINT_API_OFERTAS + `/${id}`, { headers })
   }
 
   // HttpClien Observable. Petición Post New Offer
   edithNewOffer(id: string, body: FormNewOffer): Observable<any> {
-    console.log(id, body)
-    const headers = {Authorization: `Bearer ${this.getToken()}`, 'Content-Type': 'application/json'}
-    return this._http.put(AppEndPoints.END_POINT_API_OFERTAS + `/${id}`, JSON.stringify(body), {headers})
+    const headers = { Authorization: `Bearer ${this.getToken()}`, 'Content-Type': 'application/json' }
+    return this._http.put(AppEndPoints.END_POINT_API_OFERTAS + `/${id}`, JSON.stringify(body), { headers })
   }
 
 
@@ -83,8 +91,8 @@ export class CommAPIService {
   //  obtener estado de usuario según disponibilidad del token
   getUserSessionStataus(): boolean {
     return (this._cookie.get('id_token') == null ||
-            !this._cookie.check('id_token') ||
-            this._cookie.get('id_token').length < 4) ? false : true
+      !this._cookie.check('id_token') ||
+      this._cookie.get('id_token').length < 4) ? false : true
   }
 
 }

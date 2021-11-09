@@ -9,27 +9,24 @@ import { ApiImagesService } from 'src/app/services/api-images.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
   constructor(
     private _router: Router,
     private _srvComApi: CommAPIService,
     private _srvImages: ApiImagesService
     ) { }
-  ngOnInit(): void {
+
+  //Obtiene una de las imagenes cargadas del API de imagenes
+  getImageRandom(): string {
+    let hour: number = new Date().getMinutes()
+    return this._srvImages.getRandomImage(Math.trunc(hour/3))
   }
 
   //Navegar a...
   gotToAdmin(): void{
     this._router.navigate(['admin'])
   }
-
-  getImageRandom(): string {
-    let hour: number = new Date().getMinutes()
-    let n: number = Math.trunc(hour/3)
-    return this._srvImages.getRandomImage(n)
-  }
-
 
   //Cerrar la sesión
   CloseSession(): boolean{
