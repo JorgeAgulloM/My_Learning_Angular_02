@@ -1,24 +1,35 @@
 import { Router } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommAPIService } from 'src/app/services/comm-api.service';
 import { Observable } from 'rxjs';
+import { ApiImagesService } from 'src/app/services/api-images.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
   constructor(
     private _router: Router,
-    private _srvComApi: CommAPIService
+    private _srvComApi: CommAPIService,
+    private _srvImages: ApiImagesService
     ) { }
+  ngOnInit(): void {
+  }
 
   //Navegar a...
   gotToAdmin(): void{
     this._router.navigate(['admin'])
   }
+
+  getImageRandom(): string {
+    let hour: number = new Date().getMinutes()
+    let n: number = Math.trunc(hour/3)
+    return this._srvImages.getRandomImage(n)
+  }
+
 
   //Cerrar la sesión
   CloseSession(): boolean{

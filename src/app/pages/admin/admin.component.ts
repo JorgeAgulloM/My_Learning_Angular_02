@@ -5,6 +5,7 @@ import { Component, Injectable } from '@angular/core';
 import { FormLogin } from 'src/app/Models/FormLogin'
 import { FormNewOffer } from 'src/app/Models/FormNewOffer';
 import { HomeComponent } from '../home/home.component';
+import { ApiImagesService } from 'src/app/services/api-images.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +22,16 @@ export class AdminComponent {
 
   constructor(
     private _router: Router,
-    private _srvComApi: CommAPIService
+    private _srvComApi: CommAPIService,
+    private _srvImages: ApiImagesService
   ) {
     this.offerForEdith = Array<string>()
+  }
+
+  getImageRandom(): string {
+    let hour: number = new Date().getMinutes()
+    let n: number = Math.trunc(hour/3)
+    return this._srvImages.getRandomImage(n)
   }
 
   //  Se solicita al servicio el login de usuario

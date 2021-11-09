@@ -13,15 +13,21 @@
     </a>
     <a
       *ngIf="!getAdminState()"
-      class="navbar-brand fst-italic mt-3 ms-1"
+      class="navbar-brand fst-italic mt-4"
       (click)="goToHome()">
       Tu portal de empleo
     </a>
     <a
       *ngIf="getAdminState()"
-      class="navbar-brand text-warning fs-4 fst-italic mt-3 ms-1"
+      class="navbar-brand text-warning fs-4 fst-italic mt-4"
       (click)="goToHome()">
       Modo administrador
+    </a>
+    <a
+      class="ps-5 ms-5 mt-4"
+      href="https://pixabay.com/api/docs/#"
+      target="blank">
+      Imagenes ofrecidas por la API de <h6><em><b class="ms-2 text-warning">pixabay.com</b></em></h6>
     </a>
     <button
       class="navbar-toggler"
@@ -35,6 +41,7 @@
         class="navbar-toggler-icon">
       </span>
     </button>
+
     <div
       class="collapse navbar-collapse justify-content-end"
       id="navbarSupportedContent">

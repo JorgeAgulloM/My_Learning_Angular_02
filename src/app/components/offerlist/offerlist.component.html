@@ -35,14 +35,14 @@
           <tr *ngFor="let item of getArrayDataOffers(), let i = index"> <!--Colocar aquí el ngFor-->
             <th
               scope="row">
-              <h5>{{i+1}}-</h5>
+              <h6>{{i+1}}</h6>
             </th>
             <td
-              class="p-3">
-              <h4>{{item.titulo}}</h4>
+              class="ps-5">
+              <h5>{{item.titulo}}</h5>
             </td>
             <td
-              class="ps-4 p-3"
+              class="ps-4 p-2"
               *ngIf="!getModeAmin()">
               <button
                   class="btn btn-outline-primary fa fa-eye shadow rounded-pill"
@@ -51,7 +51,7 @@
                   Ver oferta</button>
             </td>
             <td
-              class="ps-4 p-3"
+              class="ps-4 p-2"
               *ngIf="getModeAmin()">
               <ul
                 class="navbar-nav me-2">

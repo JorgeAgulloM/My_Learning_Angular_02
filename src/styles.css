@@ -9,6 +9,7 @@
 
   html,body{
     height: auto;
+    min-height: 100%;
     width: 100%;
     position: absolute;
   }
@@ -18,7 +19,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-image: url(../src/assets/BackGroundInit.jpg)  !important;
+    /* background-image: url(../src/assets/BackGroundInit.jpg)  !important; */
   }
 
   h1 {
