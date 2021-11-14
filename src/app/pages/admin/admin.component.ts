@@ -6,6 +6,7 @@ import { FormLogin } from 'src/app/Models/FormLogin'
 import { FormNewOffer } from 'src/app/Models/FormNewOffer';
 import { HomeComponent } from '../home/home.component';
 import { ApiImagesService } from 'src/app/services/api-images.service';
+import { LoginService } from 'src/app/services/login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,8 @@ export class AdminComponent {
   constructor(
     private _router: Router,
     private _srvComApi: CommAPIService,
-    private _srvImages: ApiImagesService
+    private _srvImages: ApiImagesService,
+    private _loginSrv: LoginService
   ) {
     this.offerForEdith = Array<string>()
   }
@@ -33,6 +35,12 @@ export class AdminComponent {
     let hour: number = new Date().getMinutes()
     return this._srvImages.getRandomImage(Math.trunc(hour/3))
   }
+
+  //  Se solicita al servicio el login de usuario
+/*   loginUser(data: FormLogin): Observable<FormLogin | null> {
+    console.log(this._loginSrv.login)
+    return this._loginSrv.login
+  } */
 
   //  Se solicita al servicio el login de usuario
   loginUser(value: FormLogin): Observable<any> {
@@ -51,8 +59,8 @@ export class AdminComponent {
   }
 
   //  Suscripción para editar una nueva oferta
-  edthiOffer(id: string, value: FormNewOffer): Observable<any> {
-    return this._srvComApi.edithNewOffer(id, value)
+  edthiOffer(value: FormNewOffer): Observable<any> {
+    return this._srvComApi.edithNewOffer(value)
   }
 
   //  Suscripción para eliminar una oferta

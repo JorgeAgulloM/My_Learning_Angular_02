@@ -54,16 +54,16 @@ export class CommAPIService {
     return this._http.post(AppEndPoints.END_POINT_API_NUEVA_OFERTA, JSON.stringify(body), { headers })
   }
 
+  // HttpClien Observable. Petición Put Edit Offer
+  edithNewOffer(body: FormNewOffer): Observable<FormNewOffer> {
+    const headers = { Authorization: `Bearer ${this.getToken()}`, 'Content-Type': 'application/json' }
+    return this._http.put<FormNewOffer>(AppEndPoints.END_POINT_API_OFERTAS, (body) , { headers })
+  }
+
   // HttpClien Observable. Petición Delete
   deleteOneOffer(id: string): Observable<any> {
     const headers = { Authorization: `Bearer ${this.getToken()}` }
     return this._http.delete(AppEndPoints.END_POINT_API_OFERTAS + `/${id}`, { headers })
-  }
-
-  // HttpClien Observable. Petición Post New Offer
-  edithNewOffer(id: string, body: FormNewOffer): Observable<any> {
-    const headers = { Authorization: `Bearer ${this.getToken()}`, 'Content-Type': 'application/json' }
-    return this._http.put(AppEndPoints.END_POINT_API_OFERTAS + `/${id}`, JSON.stringify(body), { headers })
   }
 
 

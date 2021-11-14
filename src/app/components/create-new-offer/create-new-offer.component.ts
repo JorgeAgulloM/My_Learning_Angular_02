@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { HomeComponent } from 'src/app/pages/home/home.component';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -41,8 +42,7 @@ export class CreateNewOfferComponent implements OnInit {
      Swal.fire({
       icon: 'error',
       title: `Oops...`,
-      text: 'No tienes permiso, logeate',
-      footer: '<a href="">Why do I have this issue?</a>'
+      text: 'No tienes permiso, logeate'
     })
 
     //En caso de que SI haya sesión iniciada...
@@ -75,6 +75,30 @@ export class CreateNewOfferComponent implements OnInit {
     email: ['', Validators.compose([Validators.required, Validators.email])]
   })
 
+  ValidateTitulo = this._fb.group({
+    titulo: ['', Validators.compose([Validators.required, Validators.maxLength(100)])]
+  })
+
+  ValidateDescripcion = this._fb.group({
+    descripcion: ['', Validators.compose([Validators.required, Validators.maxLength(300)])]
+  })
+
+  ValidateEmpresa = this._fb.group({
+    empresa: ['', Validators.compose([Validators.required, Validators.maxLength(50)])]
+  })
+
+  ValidateSalario = this._fb.group({
+    salario: ['', Validators.required]
+  })
+
+  ValidateCiudad = this._fb.group({
+    ciudad: ['', Validators.compose([Validators.required, Validators.maxLength(50)])]
+  })
+
+  ValidateEmail = this._fb.group({
+    email: ['', Validators.compose([Validators.required, Validators.email])]
+  })
+
   //Se cargan los datos de los inputs
   sendNewOffer(): void {
 
@@ -90,12 +114,7 @@ export class CreateNewOfferComponent implements OnInit {
     //Si el modo edición está activado...
     if (this.edithOfferMode){
       //Se comprueban que valores no se han modificado y se les dá el valor actual.
-      if (this.ValidateNewOffer.value.titulo == '') this.ValidateNewOffer.value.titulo = this.edithOffer[1]
-      if (this.ValidateNewOffer.value.descripcion == '') this.ValidateNewOffer.value.descripcion = this.edithOffer[2]
-      if (this.ValidateNewOffer.value.empresa == '') this.ValidateNewOffer.value.empresa = this.edithOffer[3]
-      if (this.ValidateNewOffer.value.salario == '') this.ValidateNewOffer.value.salario = this.edithOffer[4]
-      if (this.ValidateNewOffer.value.ciudad == '') this.ValidateNewOffer.value.ciudad = this.edithOffer[5]
-      if (this.ValidateNewOffer.value.email == '') this.ValidateNewOffer.value.email = this.edithOffer[6]
+      this.ValidatorsEdit()
     }
 
     //Comprobaciones de caja blanca
@@ -103,19 +122,28 @@ export class CreateNewOfferComponent implements OnInit {
 
     //Se cargan los valores en una instancia del model
     let values: FormNewOffer = new FormNewOffer(
+      this.ValidateNewOffer.value.id,
       this.ValidateNewOffer.value.titulo,
       this.ValidateNewOffer.value.descripcion,
       this.ValidateNewOffer.value.empresa,
       this.ValidateNewOffer.value.salario,
       this.ValidateNewOffer.value.ciudad,
       this.ValidateNewOffer.value.email)
+      console.log(values)
+
 
     //Si está activo el modo edición...
     if (this.edithOfferMode){
       //Se solicita a admin la edición de la ofertta
-      this._admin.edthiOffer(this.idEdithOffer, values).subscribe(
+      this._admin.edthiOffer(values).subscribe(
         //Si hay respuesta correcta...
         response => {
+          //Se informa de la edición
+          Swal.fire({
+            icon: 'success',
+            title: `Oferta: ${JSON.stringify(response)}`,
+            text: 'La oferta ha sido editada.'
+          })
           //...se solicita ir a la lista de ofertas
           this.goToOffers()
           //...se desactiva el modo de carga
@@ -129,8 +157,7 @@ export class CreateNewOfferComponent implements OnInit {
           Swal.fire({
             icon: 'error',
             title: `Oops... Error ${error.status}`,
-            text: 'Error en la edición de la oferta',
-            footer: '<a href="">Why do I have this issue?</a>'
+            text: 'Error en la edición de la oferta'
           })
       })
 
@@ -164,11 +191,36 @@ export class CreateNewOfferComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: `Oops... Error ${error.status}`,
-          text: 'Error en la inserción de la oferta',
-          footer: '<a href="">Why do I have this issue?</a>'
+          text: 'Error en la inserción de la oferta'
         })
       })
     }
+  }
+
+  //Desbloquea el botón de envio en caso de...
+  isDisabled(): boolean{
+    //...de que no se esté en proceso de carga para evitar sendas pulsaciones
+    if (!this.isLoading) {
+      //...de que no se esté editando y el formulario sea valido
+      if (!this.edithOfferMode && this.ValidateNewOffer.valid){
+        return false
+
+      //...de que se esté en modo edición y uno de los inputs haya cambiado
+      } else if (this.edithOfferMode){
+        if (this.ValidateTitulo.valid
+          || this.ValidateDescripcion.valid
+          || this.ValidateEmpresa.valid
+          || this.ValidateSalario.valid
+          || this.ValidateCiudad.valid
+          || this.ValidateEmail.valid){
+            return false
+          }
+
+      }
+    }
+
+    //En cualquier otro caso el botón estará bloqueado
+    return true
   }
 
   //Consulta si se está en modo edición
@@ -185,5 +237,36 @@ export class CreateNewOfferComponent implements OnInit {
   goToOffers(): void {
     this._admin.goToOffers()
   }
+
+  //En caso de que se esté editando, asegura que los campos tienen contenido si no se han editado
+  private ValidatorsEdit(){
+    this.ValidateNewOffer.value.id = this.edithOffer[0]
+
+    //Si título se ha editado tendrá el valor del input, si no el actual
+    this.ValidateTitulo.value.titulo == '' ?
+     this.ValidateNewOffer.value.titulo = this.edithOffer[1] :
+     this.ValidateNewOffer.value.titulo = this.ValidateTitulo.value.titulo
+
+    this.ValidateDescripcion.value.descripcion == '' ?
+     this.ValidateNewOffer.value.descripcion = this.edithOffer[2] :
+     this.ValidateNewOffer.value.descripcion = this.ValidateDescripcion.value.descripcion
+
+    this.ValidateEmpresa.value.empresa == '' ?
+     this.ValidateNewOffer.value.empresa = this.edithOffer[3] :
+     this.ValidateNewOffer.value.empresa = this.ValidateEmpresa.value.empresa
+
+    this.ValidateSalario.value.salario == '' ?
+     this.ValidateNewOffer.value.salario = this.edithOffer[4] :
+     this.ValidateNewOffer.value.salario = this.ValidateSalario.value.salario
+
+    this.ValidateCiudad.value.ciudad == '' ?
+     this.ValidateNewOffer.value.ciudad = this.edithOffer[5] :
+     this.ValidateNewOffer.value.ciudad = this.ValidateCiudad.value.ciudad
+
+    this.ValidateEmail.value.email == '' ?
+     this.ValidateNewOffer.value.email = this.edithOffer[6] :
+     this.ValidateNewOffer.value.email = this.ValidateEmail.value.email
+  }
+
 
 }

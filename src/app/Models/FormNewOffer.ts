@@ -1,5 +1,6 @@
 export class FormNewOffer {
 
+  private id: string
   private titulo: string
   private descripcion: string
   private empresa: string
@@ -8,6 +9,7 @@ export class FormNewOffer {
   private email: string
 
   constructor(
+    id: string,
     titulo: string,
     descripcion: string,
     empresa: string,
@@ -15,12 +17,17 @@ export class FormNewOffer {
     ciudad: string,
     email: string
 ) {
+    this.id = id
     this.titulo = titulo
     this.descripcion = descripcion
     this.empresa = empresa
     this.salario = salario
     this.ciudad = ciudad
     this.email = email
+  }
+
+  public getId(): string {
+    return this.id;
   }
 
   public getTitulo(): string {

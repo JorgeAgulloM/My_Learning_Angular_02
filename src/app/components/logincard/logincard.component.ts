@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { FormLogin } from 'src/app/Models/FormLogin';
 import { AdminComponent } from 'src/app/pages/admin/admin.component';
 import Swal from 'sweetalert2';
@@ -29,6 +30,15 @@ export class LogincardComponent {
     rememberMe: ['']
   })
 
+/*   sendLogin(): Observable<FormLogin | null> {
+    return this._admin.loginUser(this.ValidateLogin.value)
+  } */
+
+/*   loginUser(data: FormLogin): Observable<FormLogin | null> {
+    console.log(this._loginSrv.login)
+    return this._loginSrv.login
+  } */
+
   //Envio de datos introducidos por usuario para iniciar sesión
   sendLogin(): void {
     //Se activa el estado de carga
@@ -56,8 +66,7 @@ export class LogincardComponent {
         Swal.fire({
           icon: 'error',
           title: `Oops... Error ${error.status}`,
-          text: 'Revisa tu usuario y contraseña',
-          footer: '<a href="">Why do I have this issue?</a>'
+          text: 'Revisa tu usuario y contraseña'
         })
       }
     )

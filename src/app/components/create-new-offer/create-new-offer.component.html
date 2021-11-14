@@ -13,10 +13,12 @@
             [formGroup]="ValidateNewOffer"
             (ngSubmit)="sendNewOffer()">
             <div class="col-md-12">
-              <form class="mt-3 form-floating">
+              <form class="mt-3 form-floating"
+              [formGroup]="getEdithOfferMode() ? ValidateTitulo : ValidateNewOffer">
                 <input class="form-control col-md-4 shadow rounded-pill"
                       type="text"
                       id="titulo"
+                      name="titulo"
                       formControlName="titulo"
                       placeholder="titulo"
                       [defaultValue]="getEdithOffer(1)"
@@ -26,10 +28,12 @@
               </form>
             </div>
             <div class="col-md-12">
-              <form class="mt-3 form-floating">
+              <form class="mt-3 form-floating"
+              [formGroup]="getEdithOfferMode() ? ValidateDescripcion : ValidateNewOffer">
                 <textarea class="form-control col-md-4 shadow rounded-pill"
                       type="text"
                       id="descripcion"
+                      name="descripcion"
                       formControlName="descripcion"
                       placeholder="descripción"
                       [value]="getEdithOffer(2)"
@@ -40,7 +44,8 @@
                 </form>
             </div>
             <div class="col-md-6">
-              <div class="mt-3 form-floating">
+              <form class="mt-3 form-floating"
+              [formGroup]="getEdithOfferMode() ? ValidateEmpresa : ValidateNewOffer">
                 <input class="form-control col-md-4 shadow rounded-pill"
                       type="text"
                       id="empresa"
@@ -51,10 +56,11 @@
                 <label for="empresa"
                       class="form-label" *ngIf="!getEdithOfferMode()">Empresa que presenta la oferta</label>
                       <label for="descripcion" *ngIf="getEdithOfferMode()">Valor actual: {{getEdithOffer(3)}}</label>
-              </div>
+              </form>
             </div>
             <div class="col-md-6">
-              <form class="mt-3 form-floating">
+              <form class="mt-3 form-floating"
+              [formGroup]=" getEdithOfferMode() ? ValidateSalario : ValidateNewOffer">
                 <input class="form-control col-md-4 shadow rounded-pill"
                       type="number"
                       id="salario"
@@ -67,7 +73,8 @@
               </form>
             </div>
             <div class="col-md-6">
-              <form class="mt-3 form-floating">
+              <form class="mt-3 form-floating"
+              [formGroup]="getEdithOfferMode() ? ValidateCiudad : ValidateNewOffer">
                 <input class="form-control col-md-4 shadow rounded-pill"
                       type="text"
                       id="ciudad"
@@ -80,7 +87,8 @@
               </form>
             </div>
             <div class="col-md-6">
-              <form class="mt-3 form-floating ">
+              <form class="mt-3 form-floating"
+              [formGroup]="getEdithOfferMode() ? ValidateEmail : ValidateNewOffer">
                 <input class="form-control col-md-4 shadow rounded-pill"
                       type="email"
                       name="email"
@@ -92,19 +100,14 @@
                 <label for="email" *ngIf="getEdithOfferMode()">Valor actual: {{getEdithOffer(6)}}</label>
               </form>
             </div>
-            <div>
-              <label *ngIf="getEdithOfferMode()" class="form-label alert alert-warning"> Jose, Despues de hacer todo lo necesario para esta petición no me funciona,
-                y me devuelve un 405, así que entiendo que de alguna forma el API que nos pasaron lo tiene capado, supongo, porque si he
-                encontrado la consulta PutMaping.</label>
-            </div>
             <div class="col-md-5 mt-2">
-              <button [disabled]="this.isLoading"
+              <button
                       class="btn btn-primary m-2 shadow rounded-pill fa fa-pencil"
                       type="submit"
                       data-bs-toggle="tooltip"
                       data-bs-placement="left"
                       title="Crear"
-                      [disabled]="getEdithOfferMode() || !ValidateNewOffer.valid" ><!--Capado completamente para edición-->
+                      [disabled]="isDisabled()" ><!--Capado completamente para edición-->
                       <span *ngIf="this.isLoading" class="spinner-border spinner-border-sm mr-1"></span>
                       {{!getEdithOfferMode() ? 'Crear oferta' : 'Editar Oferta'}}
               </button>
