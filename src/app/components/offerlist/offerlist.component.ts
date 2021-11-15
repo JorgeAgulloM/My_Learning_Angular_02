@@ -13,7 +13,6 @@ import Swal from 'sweetalert2';
 export class OfferListComponent implements OnInit {
 
   private arrayDataOffers: Array<any>
-  private modeAmin: boolean
   private _user!: FormLogin | null
 
   constructor(
@@ -22,13 +21,11 @@ export class OfferListComponent implements OnInit {
     private _loginSrv: LoginService
     ) {
     this.arrayDataOffers = new Array<any>()
-    this.modeAmin = false
     this._loginSrv.login.subscribe(user => this._user = user)
   }
 
   ngOnInit(): void {
-    //Se llama las funciones de carga de datos y a la revisión de sesión de administrador
-    /* this.setModeAdmin(this._admin.UserSessionStatus()) */
+    //Se cargan las ofertas
     this.setArrayDataOffers()
   }
 
@@ -55,8 +52,7 @@ export class OfferListComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: `Oops... Error ${error.status}`,
-          text: 'Error en la carga de datos, no se ha podido cargar la lista de ofertas.',
-          footer: '<a href="">Why do I have this issue?</a>'
+          text: 'Error en la carga de datos, no se ha podido cargar la lista de ofertas.'
         })
       }
     )
@@ -146,10 +142,5 @@ export class OfferListComponent implements OnInit {
   getModeAmin(): boolean {
     return this._user != null//this.modeAmin;
   }
-
-/*   //Se comprueba carga el estado del admin
-  private setModeAdmin(value: boolean): void {
-    this.modeAmin = value
-  } */
 
 }

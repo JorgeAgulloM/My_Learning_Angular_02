@@ -30,6 +30,7 @@ export class NavbarComponent {
   //solicita cierre de sesión
   logOutAdmin():void {
     this._admin.kickUser()
+    this.goToHome()
   }
 
   //Solicita el estado de la sesión

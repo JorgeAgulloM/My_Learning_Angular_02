@@ -21,13 +21,11 @@ export class LoginService {
     this.login = this.loginModelBehaviorSubject.asObservable()
   }
 
-
   performLogin(data: FormLogin): Observable<FormLogin>{
     return this
     .http
     .post<FormLogin>(AppEndPoints.END_POINT_API_AUTH, data)
     .pipe(map(response => {
-      //response.set_password('')
       //Se emite sobre el observable para quien esté suscrito
       this.loginModelBehaviorSubject.next(response)
       //Guarga el resultado en local storage

@@ -38,8 +38,7 @@ export class ApiImagesService {
       Swal.fire({
         icon: 'error',
         title: `Oops... Error ${error.status}`,
-        text: 'Error al obtener las imagenes del API pixabay.com',
-        footer: '<a href="">Why do I have this issue?</a>'
+        text: 'Error al obtener las imagenes del API pixabay.com'
       })
       }
     )
@@ -49,7 +48,7 @@ export class ApiImagesService {
   getRandomImage(n: number): string {
     //En caso de error y que no haya imagenes en el array, se carga una por defecto
     if (this.arrayImages.length == 0){
-      //return require('ofertasEmpleo/src/assets/BackGroundInit.jpg').default as string
+      //return require('ofertasEmpleo/src/assets/BackGroundInit.jpg').default as string //TODO######################
     }
     //Si el nñumero que llega por parámetro es mayor que el length del array, se usa la última imagen
     if (n > this.arrayImages.length) {

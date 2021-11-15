@@ -1,4 +1,3 @@
-import { HomeComponent } from 'src/app/pages/home/home.component';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormNewOffer } from 'src/app/Models/FormNewOffer';
@@ -20,7 +19,6 @@ export class CreateNewOfferComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private _admin: AdminComponent,
-    private _home: HomeComponent,
     private _actvRouter: ActivatedRoute
   ) {
     this.edithOfferMode = false
@@ -28,22 +26,6 @@ export class CreateNewOfferComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //En caso de acceder a traves del nvaegador y que no haya sesión iniciada
-    //Se solicita el satado de sesión. Si no hay sesión activa...
-    /* if(!this._admin.UserSessionStatus()) {
-      //...se solicita
-     this._home.gotToHome()// goToOffers()
-     //... y se solicita la expulsión del usuario (Para prevenir que queden datos de algún tipo)
-     this._admin.kickUser()
-     //Se muestra el aviso
-     Swal.fire({
-      icon: 'error',
-      title: `Oops...`,
-      text: 'No tienes permiso, logeate'
-    })
-
-    //En caso de que SI haya sesión iniciada...
-    } else { */
 
       //Comprobaciones de caja blanca
       console.log('C.Blanca: new_offer - desde admin se navega hasta new_offer. Confirmado usuario logado. Se muestra formulario html.')
@@ -57,7 +39,6 @@ export class CreateNewOfferComponent implements OnInit {
           ([key, value]) => this.edithOffer.push(value)
         )
       }
-    //}
   }
 
   //Validaciones para los inputs. Solo se usan si NO hay modo edición
@@ -124,8 +105,6 @@ export class CreateNewOfferComponent implements OnInit {
       this.ValidateNewOffer.value.salario,
       this.ValidateNewOffer.value.ciudad,
       this.ValidateNewOffer.value.email)
-      console.log(values)
-
 
     //Si está activo el modo edición...
     if (this.edithOfferMode){

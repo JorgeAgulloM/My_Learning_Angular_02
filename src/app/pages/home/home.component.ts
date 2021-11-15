@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommAPIService } from 'src/app/services/comm-api.service';
 import { Observable } from 'rxjs';
 import { ApiImagesService } from 'src/app/services/api-images.service';
@@ -28,22 +28,10 @@ export class HomeComponent {
     this._router.navigate(['admin'])
   }
 
-/*   //Cerrar la sesión
-  CloseSession(): boolean{
-    let close = this._srvComApi.closeSessionUser()
-    this.gotToHome()
-    return close
-  } */
-
   //Navegar a...
   gotToHome(): void{
     this._router.navigate(['home'])
   }
-
-/*   //Consulta el estado de la sesión
-  UserSessionStatus(): boolean{
-    return this._.getUserSessionStataus()
-  } */
 
   //Suscripción para ver todas las ofertas
   getAllOffers(): Observable<any> {

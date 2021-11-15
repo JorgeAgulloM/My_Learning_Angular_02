@@ -17,7 +17,7 @@ export class OfferComponent implements OnInit {
     private _home: HomeComponent,
     private _router: Router,
     private _actvRouter: ActivatedRoute
-    //this._elementRef.nativeElement.ownerDocument.body.style.backgroundImage =
+
     ) {
       this.dataOffer = new Array<any>()
      }
@@ -46,8 +46,7 @@ export class OfferComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: `Oops... Error ${error.status}`,
-          text: 'Error en la carga de datos, no se ha podido cargar la oferta.',
-          footer: '<a href="">Why do I have this issue?</a>'
+          text: 'Error en la carga de datos, no se ha podido cargar la oferta.'
         })
       }
     )

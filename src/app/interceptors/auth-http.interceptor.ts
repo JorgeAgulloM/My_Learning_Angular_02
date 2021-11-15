@@ -23,10 +23,6 @@ export class AuthHttpInterceptor implements HttpInterceptor {
     this._loginSrv.login.subscribe(user => {
       this._user = user
       this._token = this._authGuard.canActivate.toString()
-      console.log(this._token)
-      this._loginSrv.login.subscribe(token => {
-        //TODO
-      })
     })
   }
 
