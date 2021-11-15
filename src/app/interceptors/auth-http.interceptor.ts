@@ -8,18 +8,22 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LoginService } from '../services/login.service';
+import { AuthguardGuard } from '../guards/authguard.guard';
 
 @Injectable()
 export class AuthHttpInterceptor implements HttpInterceptor {
 
   _user!: FormLogin | null
-  _token!: String | null
+  _token!: string | null
 
   constructor(
-    private _loginSrv: LoginService
+    private _loginSrv: LoginService,
+    private _authGuard: AuthguardGuard
   ) {
     this._loginSrv.login.subscribe(user => {
       this._user = user
+      this._token = this._authGuard.canActivate.toString()
+      console.log(this._token)
       this._loginSrv.login.subscribe(token => {
         //TODO
       })

@@ -15,7 +15,8 @@ export class CommAPIService {
   constructor(
     private _http: HttpClient,
     private _cookie: CookieService,
-    private _loginSrv: LoginService
+    private _loginSrv: LoginService,
+    private _authGuard: AuthguardGuard
   ) {
     //this.deleteToken()
   }
@@ -64,16 +65,14 @@ export class CommAPIService {
 
   // HttpClien Observable. Petición Delete
   deleteOneOffer(id: string): Observable<any> {
-    const headers = { Authorization: `Bearer ${this.getToken().split('login')}` }
+    const headers = { Authorization: `Bearer ${this.getToken()}` }
     return this._http.delete(AppEndPoints.END_POINT_API_OFERTAS + `/${id}`, { headers })
   }
 
 
   //  Getter para obtener el token
   getToken(): string {
-    console.log(localStorage.getItem('login')!.split('id_token'))
-    console.log(JSON.stringify(localStorage.getItem('login')!))
-    return ''
+    return JSON.parse(localStorage.getItem('login')!).id_token
   }
 
 /*   //  Setter para guardar el token
