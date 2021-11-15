@@ -43,13 +43,19 @@ export class AdminComponent {
   } */
 
   //  Se solicita al servicio el login de usuario
-  loginUser(value: FormLogin): Observable<any> {
-    return this._srvComApi.postUserLogin(value)
+  loginUser(data: FormLogin): Observable<FormLogin> {
+    console.log('admin, login: ', data)
+    return this._loginSrv.performLogin(data)
   }
+
+/*   //Consulta el estado de la sesión
+  UserSessionStatus(): boolean{
+    return this._loginSrv.getLogin()
+  } */
 
   //  Se solicita el logout de usuario
   kickUser(): void {
-    this._srvComApi.closeSessionUser()
+    this._loginSrv.prformLogout()
   }
 
   //  Suscripción para crear una nueva oferta
@@ -68,10 +74,10 @@ export class AdminComponent {
     return this._srvComApi.deleteOneOffer(id)
   }
 
-  //  Se envia el token obtenido en el login para que se guarde
+  /* //  Se envia el token obtenido en el login para que se guarde
   sendTokenToServer(token: string): void {
     this._srvComApi.saveToken(token)
-  }
+  } */
 
   //Recarga la vista, al hacerlo se recargan los datos.
   roloadView(): void {

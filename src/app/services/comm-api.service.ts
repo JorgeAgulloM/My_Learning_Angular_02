@@ -1,10 +1,11 @@
-import { FormLogin } from 'src/app/Models/FormLogin';
 import { AppEndPoints } from './../endpoints.component';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http'
 import { CookieService } from 'ngx-cookie-service';
 import { FormNewOffer } from '../Models/FormNewOffer';
+import { LoginService } from './login.service';
+import { AuthguardGuard } from '../guards/authguard.guard';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,10 @@ export class CommAPIService {
 
   constructor(
     private _http: HttpClient,
-    private _cookie: CookieService
+    private _cookie: CookieService,
+    private _loginSrv: LoginService
   ) {
-    this.deleteToken()
+    //this.deleteToken()
   }
 
 
@@ -39,11 +41,11 @@ export class CommAPIService {
     return this._http.get(AppEndPoints.END_POINT_API_OFERTAS + `/${id}`)
   }
 
-  //  HttpClient Observable. Petición Post Auth
+/*   //  HttpClient Observable. Petición Post Auth
   postUserLogin(body: FormLogin): Observable<any> {
     const headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer id_token' }
     return this._http.post<FormLogin>(AppEndPoints.END_POINT_API_AUTH, JSON.stringify(body), { headers })
-  }
+  } */
 
   // HttpClien Observable. Petición Post New Offer
   insertNewOffer(body: FormNewOffer): Observable<any> {
@@ -62,20 +64,24 @@ export class CommAPIService {
 
   // HttpClien Observable. Petición Delete
   deleteOneOffer(id: string): Observable<any> {
-    const headers = { Authorization: `Bearer ${this.getToken()}` }
+    const headers = { Authorization: `Bearer ${this.getToken().split('login')}` }
     return this._http.delete(AppEndPoints.END_POINT_API_OFERTAS + `/${id}`, { headers })
   }
 
 
-  //  Setter para guardar el token
+  //  Getter para obtener el token
+  getToken(): string {
+    console.log(localStorage.getItem('login')!.split('id_token'))
+    console.log(JSON.stringify(localStorage.getItem('login')!))
+    return ''
+  }
+
+/*   //  Setter para guardar el token
   saveToken(token: string) {
     this._cookie.set('id_token', token)
   }
 
-  //  Getter para obtener el token
-  getToken(): string {
-    return this._cookie.get('id_token')
-  }
+
 
   //  Setter para eliminar el token al cerrar sesión
   deleteToken(): void {
@@ -93,6 +99,6 @@ export class CommAPIService {
     return (this._cookie.get('id_token') == null ||
       !this._cookie.check('id_token') ||
       this._cookie.get('id_token').length < 4) ? false : true
-  }
+  } */
 
 }

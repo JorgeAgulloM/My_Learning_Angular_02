@@ -44,6 +44,7 @@ export class LogincardComponent {
     //Se activa el estado de carga
     this.isLoading = true
     //Se pasan los datos a una instancia del model
+    console.log('sendLogin: ', this.ValidateLogin.value)
     this._admin.loginUser(new FormLogin(
       this.ValidateLogin.value.username,
       this.ValidateLogin.value.password,
@@ -52,8 +53,9 @@ export class LogincardComponent {
       //En caso de que la respuesta sea correcta...
       response =>{
         //...Se le envia a admin el token recibido
-        this._admin.sendTokenToServer(response.id_token)
+        //this._admin.sendTokenToServer(response.id_token)
         //...y se solicita ir a las ofertas
+        console.log('loginCard = ', response)
         this._admin.goToOffers()
         //Se detiene el estado de carga
         this.isLoading = false
@@ -65,7 +67,7 @@ export class LogincardComponent {
         //...se muestra información en pantalla
         Swal.fire({
           icon: 'error',
-          title: `Oops... Error ${error.status}`,
+          title: `Oops... Error ${error}`,
           text: 'Revisa tu usuario y contraseña'
         })
       }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormLogin } from 'src/app/Models/FormLogin';
 import { AdminComponent } from 'src/app/pages/admin/admin.component';
 import { HomeComponent } from 'src/app/pages/home/home.component';
+import { LoginService } from 'src/app/services/login.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,18 +14,21 @@ export class OfferListComponent implements OnInit {
 
   private arrayDataOffers: Array<any>
   private modeAmin: boolean
+  private _user!: FormLogin | null
 
   constructor(
     private _home: HomeComponent,
-    private _admin: AdminComponent
+    private _admin: AdminComponent,
+    private _loginSrv: LoginService
     ) {
     this.arrayDataOffers = new Array<any>()
     this.modeAmin = false
+    this._loginSrv.login.subscribe(user => this._user = user)
   }
 
   ngOnInit(): void {
     //Se llama las funciones de carga de datos y a la revisión de sesión de administrador
-    this.setModeAdmin(this._home.UserSessionStatus())
+    /* this.setModeAdmin(this._admin.UserSessionStatus()) */
     this.setArrayDataOffers()
   }
 
@@ -139,12 +144,12 @@ export class OfferListComponent implements OnInit {
 
   //Se devuelve si el admin está activo
   getModeAmin(): boolean {
-    return this.modeAmin;
+    return this._user != null//this.modeAmin;
   }
 
-  //Se comprueba carga el estado del admin
+/*   //Se comprueba carga el estado del admin
   private setModeAdmin(value: boolean): void {
     this.modeAmin = value
-  }
+  } */
 
 }

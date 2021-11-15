@@ -6,6 +6,7 @@ import { OfferComponent } from './components/offer/offer.component';
 import { LogincardComponent } from './components/logincard/logincard.component';
 import { CreateNewOfferComponent } from './components/create-new-offer/create-new-offer.component';
 import { OfferListComponent } from './components/offerlist/offerlist.component';
+import { AuthguardGuard } from './guards/authguard.guard';
 
 const routes: Routes = [
   {
@@ -28,10 +29,10 @@ const routes: Routes = [
     children:[
       {path:'', component: LogincardComponent},
       {path:'login_card', component: LogincardComponent},
-      {path:'offers', component: OfferListComponent},
-      {path:'offer/:id', component: OfferComponent},
-      {path:'new_offer', component: CreateNewOfferComponent},
-      {path:'edith_offer/:id', component: CreateNewOfferComponent}
+      {path:'offers', component: OfferListComponent, canActivate: [AuthguardGuard]},
+      {path:'offer/:id', component: OfferComponent, canActivate: [AuthguardGuard]},
+      {path:'new_offer', component: CreateNewOfferComponent, canActivate: [AuthguardGuard]},
+      {path:'edith_offer/:id', component: CreateNewOfferComponent, canActivate: [AuthguardGuard]}
     ]
   }
 ];

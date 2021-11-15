@@ -12,8 +12,6 @@ const LOGIN_KEY: string = 'login'
 })
 export class LoginService {
 
-
-
   //Se genera un BehaviorSubject privado para la clase para observar y ser observado.
   private loginModelBehaviorSubject: BehaviorSubject<FormLogin | null>
   public login: Observable<FormLogin | null> //Con el login público el resto del programa podrá saber si hay o no un usuario logado
@@ -29,7 +27,7 @@ export class LoginService {
     .http
     .post<FormLogin>(AppEndPoints.END_POINT_API_AUTH, data)
     .pipe(map(response => {
-      response.set_password('')
+      //response.set_password('')
       //Se emite sobre el observable para quien esté suscrito
       this.loginModelBehaviorSubject.next(response)
       //Guarga el resultado en local storage

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { FormLogin } from 'src/app/Models/FormLogin';
+import { AdminComponent } from 'src/app/pages/admin/admin.component';
 import { HomeComponent } from 'src/app/pages/home/home.component';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,9 +12,15 @@ import { HomeComponent } from 'src/app/pages/home/home.component';
 })
 export class NavbarComponent {
 
+  private _user!: FormLogin | null
+
   constructor(
-    private _home: HomeComponent
-  ){ }
+    private _home: HomeComponent,
+    private _admin: AdminComponent,
+    private _loginSrv: LoginService
+  ){
+    this._loginSrv.login.subscribe(user => this._user = user)
+  }
 
   //Solicita ir a Login
   logInAdmin(): void {
@@ -20,12 +29,12 @@ export class NavbarComponent {
 
   //solicita cierre de sesión
   logOutAdmin():void {
-    this._home.CloseSession()
+    this._admin.kickUser()
   }
 
   //Solicita el estado de la sesión
   getAdminState(): boolean{
-    return this._home.UserSessionStatus()
+    return this._user != null//this._admin.UserSessionStatus()
   }
 
   //Solicita ir a Home

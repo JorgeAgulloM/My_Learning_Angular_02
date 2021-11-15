@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs';
 import { HomeComponent } from 'src/app/pages/home/home.component';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -15,7 +14,6 @@ import Swal from 'sweetalert2';
 export class CreateNewOfferComponent implements OnInit {
 
   private edithOfferMode: boolean
-  private idEdithOffer: string
   private edithOffer: Array<string>
   isLoading = false
 
@@ -26,14 +24,13 @@ export class CreateNewOfferComponent implements OnInit {
     private _actvRouter: ActivatedRoute
   ) {
     this.edithOfferMode = false
-    this.idEdithOffer = ''
     this.edithOffer = Array<string>()
   }
 
   ngOnInit(): void {
     //En caso de acceder a traves del nvaegador y que no haya sesión iniciada
     //Se solicita el satado de sesión. Si no hay sesión activa...
-    if(!this._home.UserSessionStatus()) {
+    /* if(!this._admin.UserSessionStatus()) {
       //...se solicita
      this._home.gotToHome()// goToOffers()
      //... y se solicita la expulsión del usuario (Para prevenir que queden datos de algún tipo)
@@ -46,7 +43,7 @@ export class CreateNewOfferComponent implements OnInit {
     })
 
     //En caso de que SI haya sesión iniciada...
-    } else {
+    } else { */
 
       //Comprobaciones de caja blanca
       console.log('C.Blanca: new_offer - desde admin se navega hasta new_offer. Confirmado usuario logado. Se muestra formulario html.')
@@ -55,14 +52,12 @@ export class CreateNewOfferComponent implements OnInit {
      if (this._actvRouter.routeConfig!.path!.toString() == `edith_offer/:id`) {
        //...se activa el modo edición
         this.edithOfferMode = true
-        //...se carga la id de la oferta a editar
-        this.idEdithOffer = this._actvRouter.snapshot.paramMap.get('id')!
         //...y se obtien los datos de esta
         Object.entries(this._admin.geTofferForEdith()).forEach(
           ([key, value]) => this.edithOffer.push(value)
         )
       }
-    }
+    //}
   }
 
   //Validaciones para los inputs. Solo se usan si NO hay modo edición
@@ -141,7 +136,7 @@ export class CreateNewOfferComponent implements OnInit {
           //Se informa de la edición
           Swal.fire({
             icon: 'success',
-            title: `Oferta: ${JSON.stringify(response)}`,
+            title: `Oferta: ${response.titulo}`,
             text: 'La oferta ha sido editada.'
           })
           //...se solicita ir a la lista de ofertas
@@ -175,6 +170,12 @@ export class CreateNewOfferComponent implements OnInit {
         //Comprobaciones de caja blanca
         console.log('C.Blanca: new_offer - Se recibe una respuesta correcta desde insert/admin/servicio')
 
+        //Se informa de la edición
+        Swal.fire({
+          icon: 'success',
+          title: `Oferta: ${response.titulo}`,
+          text: 'La oferta se ha guardado.'
+        })
         //...se solicita ir a ofertas
         this.goToOffers()
         //..se desactiva el modo de carga
