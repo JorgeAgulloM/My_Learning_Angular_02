@@ -14,7 +14,10 @@ export class ApiImagesService {
   private arrayImages: Array<string> = new Array<string>()
 
   constructor(private _http: HttpClient
-    ) { }
+    ) {
+      //Para evitar que el array esté vación al consultarlo, cargo la primera foto de forma manual.
+      this.arrayImages.push('https://pixabay.com/get/g40e3fdb0c5304faeb9f795f6b68a0e2eb706dc2ded6fd4fdae026945804adcd1c6e337b175595243e7e066dce68a0ce4b59dc10ca7e15b91ddc9be1a38b2d8a7_1280.jpg"')
+    }
 
   //Obtiene las imagenes del API de pixabay.com
   getImagesAPI(): Observable<FormImages> {
@@ -46,15 +49,11 @@ export class ApiImagesService {
 
   //Escoge una de las imagenes con el id del parámetro
   getRandomImage(n: number): string {
-    //En caso de error y que no haya imagenes en el array, se carga una por defecto
-    if (this.arrayImages.length == 0){
-      //return require('ofertasEmpleo/src/assets/BackGroundInit.jpg').default as string //TODO######################
-    }
     //Si el nñumero que llega por parámetro es mayor que el length del array, se usa la última imagen
     if (n > this.arrayImages.length) {
       n = this.arrayImages.length -1
     }
-
+    console.log(this.arrayImages)
     return this.arrayImages[n]
   }
 
