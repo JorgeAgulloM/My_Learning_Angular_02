@@ -1,128 +1,208 @@
-<main class="mt-5 mb-5 ">
+<main class="mt-5 mb-5">
   <div class="d-flex justify-content-center">
-      <div class="col-8 col-sm-4 d-flex justify-content-center align-items-center">
-
-        <div class="row justify-content-center p-2 shadow-lg mt-3 bg-body rounded">
-
-          <div class="col-md-12 p-2">
-            <label *ngIf="!getEdithOfferMode()" class="form-control bg-primary text-white shadow rounded-pill">Nueva Oferta. Completa todos los campos</label>
-            <label *ngIf="getEdithOfferMode()" class="form-control bg-primary text-white shadow rounded-pill">Oferta Nº{{getEdithOffer(0)}} - Edita lo que necesites</label>
+    <div
+      class="col-8 col-sm-4 d-flex justify-content-center align-items-center "
+    >
+      <div class="row justify-content-center p-2 mt-3 bg-light rounded"
+        >
+        <div class="col-md-12 p-2">
+          <label
+            *ngIf="!getEdithOfferMode()"
+            class="form-control bg-primary text-white rounded border-0"
+            >Nueva Oferta. Completa todos los campos</label
+          >
+          <label
+            *ngIf="getEdithOfferMode()"
+            class="form-control bg-primary text-white rounded border-0"
+            >Oferta Nº{{ getEdithOffer(0) }} - Edita lo que necesites</label
+          >
+        </div>
+        <form
+          class="row"
+          name="loginForm"
+          [formGroup]="ValidateNewOffer"
+          (ngSubmit)="sendNewOffer()"
+        >
+          <div class="col-md-12">
+            <form
+              class="mt-3 form-floating"
+              [formGroup]="
+                getEdithOfferMode() ? ValidateTitulo : ValidateNewOffer
+              "
+            >
+              <input
+                class="form-control col-md-4 rounded"
+                type="text"
+                id="titulo"
+                name="titulo"
+                formControlName="titulo"
+                placeholder="titulo"
+                [defaultValue]="getEdithOffer(1)"
+                [required]="!getEdithOfferMode()"
+              />
+              <label for="titulo" *ngIf="!getEdithOfferMode()"
+                >Título de la oferta</label
+              >
+              <label *ngIf="getEdithOfferMode()" for="titulo"
+                >Valor actual: {{ getEdithOffer(1) }}</label
+              >
+            </form>
           </div>
-          <form class="row"
-            name="loginForm"
-            [formGroup]="ValidateNewOffer"
-            (ngSubmit)="sendNewOffer()">
-            <div class="col-md-12">
-              <form class="mt-3 form-floating"
-              [formGroup]="getEdithOfferMode() ? ValidateTitulo : ValidateNewOffer">
-                <input class="form-control col-md-4 shadow rounded-pill"
-                      type="text"
-                      id="titulo"
-                      name="titulo"
-                      formControlName="titulo"
-                      placeholder="titulo"
-                      [defaultValue]="getEdithOffer(1)"
-                      [required]="!getEdithOfferMode()">
-                <label  for="titulo" *ngIf="!getEdithOfferMode()">Título de la oferta</label>
-                <label *ngIf="getEdithOfferMode()" for="titulo">Valor actual: {{getEdithOffer(1)}}</label>
-              </form>
-            </div>
-            <div class="col-md-12">
-              <form class="mt-3 form-floating"
-              [formGroup]="getEdithOfferMode() ? ValidateDescripcion : ValidateNewOffer">
-                <textarea class="form-control col-md-4 shadow rounded-pill"
-                      type="text"
-                      id="descripcion"
-                      name="descripcion"
-                      formControlName="descripcion"
-                      placeholder="descripción"
-                      [value]="getEdithOffer(2)"
-                      [required]="!getEdithOfferMode()">
-                </textarea>
-                <label for="descripcion" *ngIf="!getEdithOfferMode()">Descripción de la oferta</label>
-                <label for="descripcion" *ngIf="getEdithOfferMode()">Valor actual: {{getEdithOffer(2)}}</label>
-                </form>
-            </div>
-            <div class="col-md-6">
-              <form class="mt-3 form-floating"
-              [formGroup]="getEdithOfferMode() ? ValidateEmpresa : ValidateNewOffer">
-                <input class="form-control col-md-4 shadow rounded-pill"
-                      type="text"
-                      id="empresa"
-                      formControlName="empresa"
-                      placeholder="empresa"
-                      [value]="getEdithOffer(3)"
-                      [required]="!getEdithOfferMode()">
-                <label for="empresa"
-                      class="form-label" *ngIf="!getEdithOfferMode()">Empresa que presenta la oferta</label>
-                      <label for="descripcion" *ngIf="getEdithOfferMode()">Valor actual: {{getEdithOffer(3)}}</label>
-              </form>
-            </div>
-            <div class="col-md-6">
-              <form class="mt-3 form-floating"
-              [formGroup]=" getEdithOfferMode() ? ValidateSalario : ValidateNewOffer">
-                <input class="form-control col-md-4 shadow rounded-pill"
-                      type="number"
-                      id="salario"
-                      formControlName="salario"
-                      placeholder="salario"
-                      [value]="getEdithOffer(4)"
-                      [required]="!getEdithOfferMode()">
-                <label for="salario" *ngIf="!getEdithOfferMode()">Sueldo bruto anual</label>
-                <label for="salario" *ngIf="getEdithOfferMode()">Valor actual: {{getEdithOffer(4)}}</label>
-              </form>
-            </div>
-            <div class="col-md-6">
-              <form class="mt-3 form-floating"
-              [formGroup]="getEdithOfferMode() ? ValidateCiudad : ValidateNewOffer">
-                <input class="form-control col-md-4 shadow rounded-pill"
-                      type="text"
-                      id="ciudad"
-                      formControlName="ciudad"
-                      placeholder="ciudad"
-                      [value]="getEdithOffer(5)"
-                      [required]="!getEdithOfferMode()">
-                <label for="ciudad" *ngIf="!getEdithOfferMode()">Ciudad del pues de trabajo</label>
-                <label for="ciudad" *ngIf="getEdithOfferMode()">Valor actual: {{getEdithOffer(5)}}</label>
-              </form>
-            </div>
-            <div class="col-md-6">
-              <form class="mt-3 form-floating"
-              [formGroup]="getEdithOfferMode() ? ValidateEmail : ValidateNewOffer">
-                <input class="form-control col-md-4 shadow rounded-pill"
-                      type="email"
-                      name="email"
-                      formControlName="email"
-                      placeholder="email"
-                      [value]="getEdithOffer(6)"
-                      [required]="!getEdithOfferMode()">
-                <label for="email" *ngIf="!getEdithOfferMode()">email de la empresa</label>
-                <label for="email" *ngIf="getEdithOfferMode()">Valor actual: {{getEdithOffer(6)}}</label>
-              </form>
-            </div>
-            <div class="col-md-5 mt-2">
-              <button
-                      class="btn btn-primary m-2 shadow rounded-pill fa fa-pencil"
-                      type="submit"
-                      data-bs-toggle="tooltip"
-                      data-bs-placement="left"
-                      title="Crear"
-                      [disabled]="isDisabled()" ><!--Capado completamente para edición-->
-                      <span *ngIf="this.isLoading" class="spinner-border spinner-border-sm mr-1"></span>
-                      {{!getEdithOfferMode() ? 'Crear oferta' : 'Editar Oferta'}}
-              </button>
-            </div>
-          </form>
-          <div class="col-12">
-            <button class="btn btn-primary m-2 ms-3 shadow rounded-pill fa fa-arrow-left"
-                    (click)="goToOffers()"
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="left"
-                    title="Volver a las ofertas">
-                    volver
+          <div class="col-md-12">
+            <form
+              class="mt-3 form-floating"
+              [formGroup]="
+                getEdithOfferMode() ? ValidateDescripcion : ValidateNewOffer
+              "
+            >
+              <textarea
+                class="form-control col-md-4 rounded"
+                type="text"
+                id="descripcion"
+                name="descripcion"
+                formControlName="descripcion"
+                placeholder="descripción"
+                [value]="getEdithOffer(2)"
+                [required]="!getEdithOfferMode()"
+              >
+              </textarea>
+              <label for="descripcion" *ngIf="!getEdithOfferMode()"
+                >Descripción de la oferta</label
+              >
+              <label for="descripcion" *ngIf="getEdithOfferMode()"
+                >Valor actual: {{ getEdithOffer(2) }}</label
+              >
+            </form>
+          </div>
+          <div class="col-md-6">
+            <form
+              class="mt-3 form-floating"
+              [formGroup]="
+                getEdithOfferMode() ? ValidateEmpresa : ValidateNewOffer
+              "
+            >
+              <input
+                class="form-control col-md-4 rounded"
+                type="text"
+                id="empresa"
+                formControlName="empresa"
+                placeholder="empresa"
+                [value]="getEdithOffer(3)"
+                [required]="!getEdithOfferMode()"
+              />
+              <label
+                for="empresa"
+                class="form-label"
+                *ngIf="!getEdithOfferMode()"
+                >Empresa que presenta la oferta</label
+              >
+              <label for="descripcion" *ngIf="getEdithOfferMode()"
+                >Valor actual: {{ getEdithOffer(3) }}</label
+              >
+            </form>
+          </div>
+          <div class="col-md-6">
+            <form
+              class="mt-3 form-floating"
+              [formGroup]="
+                getEdithOfferMode() ? ValidateSalario : ValidateNewOffer
+              "
+            >
+              <input
+                class="form-control col-md-4 rounded"
+                type="number"
+                id="salario"
+                formControlName="salario"
+                placeholder="salario"
+                [value]="getEdithOffer(4)"
+                [required]="!getEdithOfferMode()"
+              />
+              <label for="salario" *ngIf="!getEdithOfferMode()"
+                >Sueldo bruto anual</label
+              >
+              <label for="salario" *ngIf="getEdithOfferMode()"
+                >Valor actual: {{ getEdithOffer(4) }}</label
+              >
+            </form>
+          </div>
+          <div class="col-md-6">
+            <form
+              class="mt-3 form-floating"
+              [formGroup]="
+                getEdithOfferMode() ? ValidateCiudad : ValidateNewOffer
+              "
+            >
+              <input
+                class="form-control col-md-4 rounded"
+                type="text"
+                id="ciudad"
+                formControlName="ciudad"
+                placeholder="ciudad"
+                [value]="getEdithOffer(5)"
+                [required]="!getEdithOfferMode()"
+              />
+              <label for="ciudad" *ngIf="!getEdithOfferMode()"
+                >Ciudad del pues de trabajo</label
+              >
+              <label for="ciudad" *ngIf="getEdithOfferMode()"
+                >Valor actual: {{ getEdithOffer(5) }}</label
+              >
+            </form>
+          </div>
+          <div class="col-md-6">
+            <form
+              class="mt-3 form-floating"
+              [formGroup]="
+                getEdithOfferMode() ? ValidateEmail : ValidateNewOffer
+              "
+            >
+              <input
+                class="form-control col-md-4 rounded"
+                type="email"
+                name="email"
+                formControlName="email"
+                placeholder="email"
+                [value]="getEdithOffer(6)"
+                [required]="!getEdithOfferMode()"
+              />
+              <label for="email" *ngIf="!getEdithOfferMode()"
+                >email de la empresa</label
+              >
+              <label for="email" *ngIf="getEdithOfferMode()"
+                >Valor actual: {{ getEdithOffer(6) }}</label
+              >
+            </form>
+          </div>
+          <div class="col-md-5 mt-2">
+            <button
+              class="btn btn-primary m-2 rounded fa fa-pencil"
+              type="submit"
+              data-bs-toggle="tooltip"
+              data-bs-placement="left"
+              title="Crear"
+              [disabled]="isDisabled()"
+            >
+              <!--Capado completamente para edición-->
+              <span
+                *ngIf="this.isLoading"
+                class="spinner-border spinner-border-sm mr-1"
+              ></span>
+              {{ !getEdithOfferMode() ? "Crear oferta" : "Editar Oferta" }}
             </button>
           </div>
+        </form>
+        <div class="col-12">
+          <button
+            class="btn btn-primary m-2 ms-3 rounded fa fa-arrow-left"
+            (click)="goToOffers()"
+            data-bs-toggle="tooltip"
+            data-bs-placement="left"
+            title="Volver a las ofertas"
+          >
+            volver
+          </button>
         </div>
       </div>
+    </div>
   </div>
 </main>

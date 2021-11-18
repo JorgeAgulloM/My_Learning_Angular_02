@@ -1,81 +1,99 @@
-<main class="mt-5 mb-5 ">
-    <div class="d-flex justify-content-center">
-        <div class="col-8 col-sm-2">
-
-          <div class="row justify-content-center p-2 shadow-lg mt-3 bg-body rounded">
-
-            <div class="col-md-12 p-2">
-              <label class="form-control bg-primary text-white shadow rounded-pill">Por favor, introduce tus credenciales</label>
-            </div>
-
-            <form class="row"
-              name="FormLogin"
-              [formGroup]="ValidateLogin"
-              (ngSubmit)="sendLogin()">
-              <div class="col-md-12">
-                <div class="input-group mt-3 form-floating">
-                  <input class="form-control col-md-4 shadow rounded-pill"
-                        type="text"
-                        name="username"
-                        formControlName="username"
-                        placeholder="Dirección de correo"
-                        required
-                        data-bs-toggle="tooltip"
-                        data-bs-placement="left"
-                        title="Introduce el email con el que te registraste">
-                  <label for="user"
-                        class="form-label">Usuario</label>
-                  <span class="input-group-text shadow rounded-pill"id="email">@</span>
-                </div>
-              </div>
-              <div class="input-group col-md-12 mt-3 form-floating">
-                <input
-                      class="form-control shadow rounded-pill"
-                      [type]="getShowPass() ? 'text' : 'password'"
-                      id="loginPassword"
-                      formControlName="password"
-                      placeholder="Contraseña"
-                      required
-                      data-bs-toggle="tooltip"
-                      data-bs-placement="left"
-                      title="Introduce tu contraseña">
-                      <button class="btn btn-primary shadow rounded-pill"
-                              type="button"
-                              id="ShowLoginPassword"
-                              (click)="setShowPass()">
-                          <span [class]="getShowPass() ? 'fa fa-eye' : 'fa fa-eye-slash'"></span>
-                        </button>
-                <label for="password"
-                      class="form-label ms-2">Contraseña</label>
-              </div>
-              <div class="col-12 mt-3">
-                <div class="form-check form-switch">
-                  <input class="form-check-input"
-                  type="checkbox"
-                  name="rememberMe"
-                  role="switch"
-                  formControlName="rememberMe"
-                  data-bs-toggle="tooltip"
-                  data-bs-placement="left"
-                  title="Espero que te las hayas leido">
-                  <label class="form-check-label" for="invalidCheck">
-                    Recuérdame.
-                  </label>
-                </div>
-              </div>
-              <div class="col-md-12 mt-4">
-                <button [disabled]="this.isLoading || !this.ValidateLogin.valid"
-                        class="btn btn-primary m-2 col-md-4 shadow rounded-pill"
-                        type="submit"
-                        data-bs-toggle="tooltip"
-                        data-bs-placement="left"
-                        title="Si lo ves, pulsa para entrar">
-                        <span *ngIf="this.isLoading" class="spinner-border spinner-border-sm mr-1"></span>
-                        Login
-                </button>
-              </div>
-            </form>
-          </div>
+<main class="mt-5 mb-5">
+  <div class="d-flex justify-content-center">
+    <div class="col-8 col-sm-2">
+      <div class="row justify-content-center p-2 mt-3 bg-light rounded">
+        <div class="col-md-12 p-2">
+          <label class="form-control bg-primary text-white rounded"
+            >Por favor, introduce tus credenciales</label
+          >
         </div>
+
+        <form
+          class="row"
+          name="FormLogin"
+          [formGroup]="ValidateLogin"
+          (ngSubmit)="sendLogin()"
+        >
+          <div class="col-md-12">
+            <div class="input-group mt-3 form-floating">
+              <input
+                class="form-control col-md-4 rounded-start"
+                type="text"
+                name="username"
+                formControlName="username"
+                placeholder="Dirección de correo"
+                required
+                data-bs-toggle="tooltip"
+                data-bs-placement="left"
+                title="Introduce el email con el que te registraste"
+              />
+              <label for="user" class="form-label">Usuario</label>
+              <span class="input-group-text rounded-end" id="email">@</span>
+            </div>
+          </div>
+          <div class="input-group col-md-12 mt-3 form-floating">
+            <input
+              class="form-control rounded-start"
+              [type]="getShowPass() ? 'text' : 'password'"
+              id="loginPassword"
+              formControlName="password"
+              placeholder="Contraseña"
+              required
+              data-bs-toggle="tooltip"
+              data-bs-placement="left"
+              title="Introduce tu contraseña"
+            />
+            <button
+              class="btn btn-primary rounded-end"
+              type="button"
+              id="ShowLoginPassword"
+              (click)="setShowPass()"
+            >
+              <span
+                [class]="
+                  getShowPass()
+                    ? 'btn-primary fa fa-eye'
+                    : 'btn-primary fa fa-eye-slash'
+                "
+              ></span>
+            </button>
+            <label for="password" class="form-label ms-2">Contraseña</label>
+          </div>
+          <div class="col-12 mt-3">
+            <div class="form-check form-switch">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                name="rememberMe"
+                role="switch"
+                formControlName="rememberMe"
+                data-bs-toggle="tooltip"
+                data-bs-placement="left"
+                title="Espero que te las hayas leido"
+              />
+              <label class="form-check-label" for="invalidCheck">
+                Recuérdame.
+              </label>
+            </div>
+          </div>
+          <div class="col-md-12 mt-4">
+            <button
+              [disabled]="this.isLoading || !this.ValidateLogin.valid"
+              class="btn btn-primary m-2 col-md-4 rounded"
+              type="submit"
+              data-bs-toggle="tooltip"
+              data-bs-placement="left"
+              title="Si lo ves, pulsa para entrar"
+            >
+              <span
+                *ngIf="this.isLoading"
+                class="spinner-border spinner-border-sm mr-1"
+              ></span>
+              Login
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 </main>

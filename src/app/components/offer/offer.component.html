@@ -1,36 +1,47 @@
-
 <!-- this creates a google map on the page with the given lat/lng from -->
 <!-- the component as the initial center of the map: -->
 <!-- <agm-map [latitude]="lat" [longitude]="lng">
   <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
 </agm-map> -->
 
-
-
 <div class="d-flex justify-content-center">
   <div class="col-8 col-sm-4 d-flex justify-content-center align-items-center">
-
-    <div class="row justify-content-center p-2 shadow-lg mt-3 bg-body rounded">
-
+    <div class="row justify-content-center p-2 mt-3 bg-light rounded">
       <div class="col-md-12 p-2">
-        <label class="form-control bg-primary text-white shadow rounded-pill"><h3>Oferta Nº {{this.getDataOffer(0)}}</h3></label>
+        <label class="form-control bg-primary text-white"
+          ><h3>Oferta Nº {{ this.getDataOffer(0) }}</h3></label
+        >
       </div>
 
-      <div class="card fs-4" style="width: 35rem;">
+      <div class="card fs-4 bg-transparent border-0" style="width: 35rem">
         <div class="card-body">
-          <h3 class="card-title">{{this.getDataOffer(1)}}</h3>
-          <h5 class="card-text">Empresa: {{getDataOffer(3)}}</h5>
+          <h3 class="card-title">{{ this.getDataOffer(1) }}</h3>
+          <h5 class="card-text">Empresa: {{ getDataOffer(3) }}</h5>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">Descripción: <p>{{getDataOffer(2)}}</p></li>
-          <li class="list-group-item">Ciudad del puesto de trabajo: <p>{{getDataOffer(5)}}</p></li>
-          <li class="list-group-item">Sueldo: <p>{{getDataOffer(4)}}€ brutos al año</p></li>
-          <li class="list-group-item">Email de contacto: <p>{{getDataOffer(6)}}</p></li>
+          <li class="list-group-item bg-transparent border-top">
+            Descripción:
+            <p>{{ getDataOffer(2) }}</p>
+          </li>
+          <li class="list-group-item bg-transparent border-top">
+            Ciudad del puesto de trabajo:
+            <p>{{ getDataOffer(5) }}</p>
+          </li>
+          <li class="list-group-item bg-transparent border-top">
+            Sueldo:
+            <p>{{ getDataOffer(4) }}€ brutos al año</p>
+          </li>
+          <li class="list-group-item bg-transparent border-top">
+            Email de contacto:
+            <p>{{ getDataOffer(6) }}</p>
+          </li>
         </ul>
         <div class="col-md-12 mt-4">
-          <button class="btn btn-primary shadow-sm m-2 col-md-2 shadow rounded-pill"
-                (click)="goToHome()">
-                  Volver
+          <button
+            class="btn btn-primary shadow-sm m-2 col-md-2 rounded"
+            (click)="goToHome()"
+          >
+            Volver
           </button>
         </div>
       </div>

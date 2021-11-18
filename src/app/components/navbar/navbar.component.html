@@ -1,33 +1,40 @@
-
-  <nav
-    class="navbar navbar-expand-lg navbar-dark bg-primary border-0 ps-3 pe-3 m-3 shadow-lg rounded-pill">
-  <div
-    class="container-fluid">
+<nav
+  class="navbar navbar-expand-lg border-0 ps-3 pe-3"
+  style="background-color: rgba(2, 117, 216, 0.8)"
+>
+  <div class="container-fluid">
     <a
       class="btn navbar-brand fs-2 fw-bold fst-italic"
       (click)="goToHome()"
       data-bs-toggle="tooltip"
       data-bs-placement="rigth"
-      title="Home">
+      title="Home"
+    >
       Empleum
     </a>
     <a
       *ngIf="!getAdminState()"
       class="navbar-brand fst-italic mt-4"
-      (click)="goToHome()">
+      (click)="goToHome()"
+    >
       Tu portal de empleo
     </a>
     <a
       *ngIf="getAdminState()"
       class="navbar-brand text-warning fs-4 fst-italic mt-4"
-      (click)="goToHome()">
+      (click)="goToHome()"
+    >
       Modo administrador
     </a>
     <a
       class="ps-5 ms-5 mt-4"
       href="https://pixabay.com/api/docs/#"
-      target="blank">
-      Imagenes ofrecidas por la API de <h6><em><strong class="ms-2 text-warning">pixabay.com</strong></em></h6>
+      target="blank"
+    >
+      Imagenes ofrecidas por la API de
+      <h6>
+        <em><strong class="ms-2 text-warning">pixabay.com</strong></em>
+      </h6>
     </a>
     <button
       class="navbar-toggler"
@@ -36,37 +43,37 @@
       data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent"
       aria-expanded="false"
-      aria-label="Toggle navigation">
-      <span
-        class="navbar-toggler-icon">
-      </span>
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"> </span>
     </button>
 
     <div
       class="collapse navbar-collapse justify-content-end"
-      id="navbarSupportedContent">
-      <form
-        class="d-flex">
+      id="navbarSupportedContent"
+    >
+      <form class="d-flex">
         <button
-            (click)="logOutAdmin()"
-            class="btn btn-warning fa fa-key fa-4x fw-bold fs-5 shadow rounded-pill"
-            *ngIf="getAdminState()"
-            data-bs-toggle="tooltip"
-            data-bs-placement="left"
-            title="salir">
-            LogOut
-          </button>
+          (click)="logOutAdmin()"
+          class="btn btn-warning fa fa-key fa-4x fw-bold fs-5"
+          *ngIf="getAdminState()"
+          data-bs-toggle="tooltip"
+          data-bs-placement="left"
+          title="salir"
+        >
+          LogOut
+        </button>
         <button
-            (click)="logInAdmin()"
-            class="btn btn-success fa fa-user-circle fa-4x fw-bold fs-5 shadow rounded-pill"
-            *ngIf="!getAdminState()"
-            data-bs-toggle="tooltip"
-            data-bs-placement="left"
-            title="Acceso para administradores">
-            LogIn
-          </button>
+          (click)="logInAdmin()"
+          class="btn btn-success fa fa-user-circle fa-4x fw-bold fs-5"
+          *ngIf="!getAdminState()"
+          data-bs-toggle="tooltip"
+          data-bs-placement="left"
+          title="Acceso para administradores"
+        >
+          LogIn
+        </button>
       </form>
     </div>
   </div>
 </nav>
-

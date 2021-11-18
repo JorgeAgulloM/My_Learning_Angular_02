@@ -27,3 +27,12 @@
   }
 
   ::-webkit-scrollbar {display: none;}
+
+  .bg-primary, .btn-primary, .btn-outline-primary{
+    background-color: rgba(2, 117, 216, 0.8) !important;
+    color: white;
+  }
+
+  .bg-light{
+    background-color: rgba(250, 250, 250, 0.8) !important;
+  }
